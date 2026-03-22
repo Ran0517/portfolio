@@ -1,0 +1,1961 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rania El Bahri — Finance & Management Control</title>
+<!-- Lang resolved before first paint — prevents screen readers from parsing wrong language -->
+<script>
+  (function(){
+    var lang = 'fr';
+    try { var s = localStorage.getItem('lang'); if (s === 'en') lang = 'en'; } catch(e) {}
+    if (lang === 'fr') {
+      var b = (navigator.language || navigator.userLanguage || '').toLowerCase();
+      if (b.startsWith('en')) lang = 'en';
+    }
+    document.documentElement.lang = lang;
+    window.__initLang = lang;
+  })();
+
+  /* ── ACCORDION — défini ici pour être disponible avant tout bouton ── */
+  function toggleEpbm(btn) {
+    var card   = btn.closest('.project-card');
+    var drawer = card.querySelector('.epbm-drawer');
+    var isOpen = drawer.classList.contains('open');
+
+    /* Ferme tous les autres drawers */
+    document.querySelectorAll('.epbm-drawer.open').forEach(function(d) {
+      d.classList.remove('open');
+      var b = d.closest('.project-card').querySelector('.epbm-toggle');
+      if (b) { b.classList.remove('open'); b.setAttribute('aria-expanded','false'); }
+    });
+
+    if (!isOpen) {
+      drawer.classList.add('open');
+      btn.classList.add('open');
+      btn.setAttribute('aria-expanded','true');
+    }
+  }
+</script>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+CiAgPHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iNiIgZmlsbD0iIzFCMzU1NyIvPgogIDxwb2x5Z29uIHBvaW50cz0iMTYsNCAyOCwxNiAxNiwyOCA0LDE2IiBmaWxsPSJub25lIiBzdHJva2U9IiNDOTkyM0IiIHN0cm9rZS13aWR0aD0iMS41Ii8+CiAgPHBvbHlnb24gcG9pbnRzPSIxNiw5IDIzLDE2IDE2LDIzIDksMTYiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0M5OTIzQiIgc3Ryb2tlLXdpZHRoPSIxIi8+CiAgPHRleHQgeD0iMTYiIHk9IjIwLjUiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhLHNlcmlmIiBmb250LXNpemU9IjExIiBmb250LXdlaWdodD0iYm9sZCIgZmlsbD0iI0U4QjA2QSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+UjwvdGV4dD4KPC9zdmc+">
+<link rel="shortcut icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+CiAgPHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iNiIgZmlsbD0iIzFCMzU1NyIvPgogIDxwb2x5Z29uIHBvaW50cz0iMTYsNCAyOCwxNiAxNiwyOCA0LDE2IiBmaWxsPSJub25lIiBzdHJva2U9IiNDOTkyM0IiIHN0cm9rZS13aWR0aD0iMS41Ii8+CiAgPHBvbHlnb24gcG9pbnRzPSIxNiw5IDIzLDE2IDE2LDIzIDksMTYiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0M5OTIzQiIgc3Ryb2tlLXdpZHRoPSIxIi8+CiAgPHRleHQgeD0iMTYiIHk9IjIwLjUiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhLHNlcmlmIiBmb250LXNpemU9IjExIiBmb250LXdlaWdodD0iYm9sZCIgZmlsbD0iI0U4QjA2QSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+UjwvdGV4dD4KPC9zdmc+">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:        #F8F7F4;
+    --navy:      #1B3557;
+    --navy-light:#2A4A72;
+    --gold:      #C9923B;
+    --gold-accessible: #96611A; /* WCAG AA on --bg: 4.87:1 — text use only on light backgrounds */
+    --gold-light:#E8B06A;
+    --text:      #2D3748;
+    --muted:     #6B7280;
+    --border:    #E2DFD7;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── LANGUAGE SWITCH ── */
+  [data-lang] { transition: opacity 0.25s; }
+  body.lang-fr [data-lang="en"],
+  body.lang-en [data-lang="fr"] { display: none !important; }
+
+  .lang-switch {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  .lang-btn {
+    padding: 6px 13px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: background 0.18s, color 0.18s;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .lang-btn.active {
+    background: var(--navy);
+    color: white;
+  }
+
+  .lang-btn:not(.active):hover {
+    background: var(--border);
+    color: var(--navy);
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(248,247,244,0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5vw;
+    height: 60px;
+    gap: 24px;
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--navy);
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    list-style: none;
+  }
+
+  .nav-right a {
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+    white-space: nowrap;
+  }
+
+  .nav-right a:hover { color: var(--navy); }
+
+  .nav-cv-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 16px;
+    border: 1px solid var(--navy);
+    color: var(--navy) !important;
+    font-size: 12px !important;
+    letter-spacing: 0.07em !important;
+    font-weight: 500 !important;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s !important;
+    white-space: nowrap;
+  }
+
+  .nav-cv-btn:hover { background: var(--navy); color: white !important; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 60px;
+  }
+
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 6vw 80px 8vw;
+  }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold-accessible);
+    margin-bottom: 28px;
+  }
+
+  .hero-tag::before {
+    content: '';
+    display: block;
+    width: 28px; height: 1px;
+    background: var(--gold-accessible);
+  }
+
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(40px, 5vw, 68px);
+    font-weight: 600;
+    color: var(--navy);
+    line-height: 1.08;
+    letter-spacing: -0.01em;
+    margin-bottom: 24px;
+  }
+
+  .hero-golden {
+    font-size: 16px;
+    color: var(--text);
+    max-width: 480px;
+    line-height: 1.8;
+    margin-bottom: 14px;
+    border-left: 3px solid var(--gold);
+    padding-left: 20px;
+  }
+
+  .hero-sub {
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--muted);
+    max-width: 440px;
+    line-height: 1.75;
+    margin-bottom: 40px;
+    padding-left: 23px;
+  }
+
+  .cta-group {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 28px;
+    background: var(--navy);
+    color: white;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .btn-primary:hover { background: var(--navy-light); transform: translateY(-1px); }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 13px 27px;
+    background: transparent;
+    color: var(--navy);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    border: 1px solid var(--navy);
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .btn-secondary:hover { background: var(--navy); color: white; }
+
+  /* ── HERO VISUAL ── */
+  .hero-visual {
+    background: var(--navy);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 80px 6vw;
+    position: relative;
+    overflow: hidden;
+    gap: 36px;
+    }
+
+  .hero-visual::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 300px; height: 300px;
+    border: 60px solid rgba(201,146,59,0.1);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  .hero-visual::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; left: -40px;
+    width: 200px; height: 200px;
+    border: 40px solid rgba(201,146,59,0.06);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  /* ── Losange doré — motif marocain abstrait ── */
+  .hero-visual .diamond-pattern {
+    position: absolute;
+    bottom: 16px; right: 16px;
+    z-index: 0;
+    opacity: 0.07;
+    pointer-events: none;
+  }
+
+  .photo-wrap { position: relative; z-index: 1; }
+
+  .photo-frame {
+    width: 136px; height: 136px;
+    border-radius: 50%;
+    border: 3px solid rgba(201,146,59,0.45);
+    overflow: hidden;
+    background: rgba(255,255,255,0.06);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .photo-frame svg { opacity: 0.35; }
+
+  .photo-caption {
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+    font-size: 10px;
+    color: rgba(255,255,255,0.28);
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    width: 100%;
+    max-width: 320px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .stat-card {
+    background: rgba(255,255,255,0.05);
+    padding: 24px 18px;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.07);
+    transition: background 0.2s;
+  }
+
+  .stat-card:hover { background: rgba(255,255,255,0.09); }
+
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 38px;
+    font-weight: 600;
+    color: var(--gold-light);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .stat-label {
+    font-size: 10px;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    line-height: 1.4;
+  }
+
+  /* ── SECTIONS ── */
+  section { padding: 100px 8vw; }
+
+  .section-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold-accessible);
+    margin-bottom: 20px;
+  }
+
+  .section-eyebrow::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+    max-width: 80px;
+  }
+
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(30px, 3.8vw, 50px);
+    font-weight: 600;
+    color: var(--navy);
+    line-height: 1.12;
+    margin-bottom: 16px;
+  }
+
+  .section-intro {
+    font-size: 17px;
+    font-weight: 300;
+    color: var(--muted);
+    max-width: 580px;
+    margin-bottom: 60px;
+    line-height: 1.8;
+  }
+
+  .divider {
+    width: 80px;
+    height: 16px;
+    margin: 32px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .divider::before,
+  .divider::after {
+    content: '';
+    flex: 1;
+    height: 1.5px;
+    background: var(--gold);
+    opacity: 0.6;
+  }
+  /* Losange central du divider */
+  .divider::before { width: 28px; }
+  .divider::after  { width: 28px; }
+
+  /* ── ABOUT GRID ── */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 5fr 4fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .about-narrative p {
+    font-size: 16px;
+    color: var(--text);
+    line-height: 1.85;
+    margin-bottom: 20px;
+  }
+
+  .quote-block {
+    border-left: 3px solid var(--gold);
+    padding: 18px 0 18px 24px;
+    margin: 28px 0;
+    background: rgba(201,146,59,0.04);
+  }
+
+  .quote-block p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--navy);
+    line-height: 1.45;
+    margin-bottom: 0;
+  }
+
+  .quote-attr {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 8px;
+    font-style: italic;
+  }
+
+  /* ── DUAL TIMELINE ── */
+  .dual-timeline {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 48px;
+    margin-top: 40px;
+    align-items: start;
+  }
+
+  /* Education column titles */
+  .tl-edu .timeline-title {
+    font-size: 14px;
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+
+  .tl-col-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .tl-col-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .tl-col-label.exp { color: var(--gold-accessible); }
+  .tl-col-label.edu { color: var(--navy); opacity: 0.5; }
+
+  /* ── TIMELINE ── */
+  .timeline {
+    position: relative;
+    padding-left: 32px;
+  }
+
+  /* Trait via ::after de chaque item sauf le dernier */
+  .timeline-item {
+    position: relative;
+    padding-bottom: 32px;
+  }
+
+  /* Trait vertical : part du centre du point vers le bas */
+  .timeline-item::after {
+    content: '';
+    position: absolute;
+    left: -20px;
+    top: 15px;
+    bottom: -32px;
+    width: 1px;
+    background: var(--border);
+    z-index: 0;
+  }
+
+  .timeline-item:last-child::after { display: none; }
+
+  /* Education dashed line */
+  .tl-edu .timeline-item::after {
+    background: repeating-linear-gradient(
+      to bottom,
+      var(--border) 0, var(--border) 6px,
+      transparent 6px, transparent 12px
+    );
+  }
+
+  /* Point standard : 10px, centré sur left:-20px */
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -25px; top: 5px;
+    width: 10px; height: 10px;
+    background: var(--gold);
+    border-radius: 50%;
+    border: 2px solid var(--bg);
+    z-index: 1;
+  }
+
+  /* Education dot */
+  .tl-edu .timeline-item::before {
+    background: var(--bg);
+    border: 2px solid var(--navy);
+    opacity: 0.7;
+  }
+
+  /* Wafasalaf featured dot : 16px */
+  .timeline-item.featured::before {
+    width: 16px; height: 16px;
+    left: -28px; top: 3px;
+    background: var(--gold);
+    border: 3px solid var(--bg);
+    box-shadow: 0 0 0 4px rgba(201,146,59,0.2), 0 0 0 8px rgba(201,146,59,0.07);
+    z-index: 1;
+  }
+
+  /* Trait du featured part plus bas (badge + date) */
+  .timeline-item.featured::after {
+    top: 19px;
+  }
+
+  .timeline-date {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+
+  .timeline-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 3px;
+    line-height: 1.3;
+    hyphens: auto;
+    word-break: break-word;
+  }
+
+  /* Education column titles handled in dual-timeline block above */
+
+  .timeline-org { font-size: 13px; color: var(--gold-accessible); font-weight: 500; margin-bottom: 8px; }
+  .timeline-item.featured .timeline-org { color: var(--gold-accessible); font-weight: 500; }
+
+  /* All exp timeline orgs use gold-accessible for consistency */
+  .tl-exp .timeline-item .timeline-org { color: var(--gold-accessible); font-weight: 500; }
+  /* Education orgs stay muted */
+  .tl-edu .timeline-item .timeline-org { color: var(--muted); font-weight: 500; }
+  .timeline-desc { font-size: 13px; color: var(--muted); line-height: 1.65; }
+
+  @media (max-width: 960px) {
+    .dual-timeline { grid-template-columns: 1fr; gap: 40px; }
+  }
+
+  /* ── SIDEBAR ── */
+  .skills-sidebar {
+    position: sticky;
+    top: 80px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .skills-group { padding: 22px 0; border-bottom: 1px solid var(--border); }
+  .skills-group:first-child { padding-top: 0; }
+
+  .skills-group-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 7px; }
+
+  .skill-tag {
+    display: inline-block;
+    padding: 5px 13px;
+    border: 1px solid var(--border);
+    font-size: 13px;
+    color: var(--navy);
+    background: white;
+    transition: border-color 0.2s;
+  }
+
+  .skill-tag:hover { border-color: var(--navy); }
+  .skill-tag.highlight { background: var(--navy); color: white; border-color: var(--navy); }
+  .skill-tag.gold { color: var(--gold-accessible); border-color: rgba(201,146,59,0.35); }
+
+  .lang-item { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+  .lang-name { font-size: 13px; color: var(--navy); min-width: 76px; font-weight: 500; }
+
+  .lang-bar-track {
+    flex: 1; height: 3px;
+    background: rgba(150, 97, 26, 0.15);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .lang-bar-fill { height: 100%; background: var(--gold-accessible); border-radius: 2px; opacity: 1; }
+  .lang-level { font-size: 11px; color: var(--muted); min-width: 72px; text-align: right; }
+
+  /* ── SKILL BARS (compétences techniques) ── */
+  .skill-bars { display: flex; flex-direction: column; gap: 14px; }
+
+  .skill-bar-item {}
+
+  .skill-bar-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 5px;
+  }
+
+  .skill-bar-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--navy);
+  }
+
+  .skill-bar-lvl {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .skill-bar-track {
+    width: 100%;
+    height: 3px;
+    background: var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .skill-bar-fill {
+    height: 100%;
+    background: var(--navy);
+    border-radius: 2px;
+    opacity: 0.45;
+    transition: width 0.8s ease;
+  }
+
+  /* AMF skill — gold fill */
+  .skill-bar-fill--gold {
+    background: var(--gold);
+    opacity: 0.8;
+  }
+
+  /* ── AMF BANNER ── */
+  .amf-banner {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    background: rgba(201,146,59,0.05);
+    border: 1px solid rgba(201,146,59,0.22);
+    padding: 18px 24px;
+    margin-top: 28px;
+  }
+
+  .amf-icon {
+    flex-shrink: 0;
+    width: 40px; height: 40px;
+    background: var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ── TIMELINE FEATURED ── */
+  .timeline-item.featured .timeline-title { font-size: 16px; }
+
+  .timeline-item.featured .timeline-org {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--gold-accessible);
+  }
+
+  .featured-badge {
+    display: inline-block;
+    margin-bottom: 6px;
+    padding: 3px 10px;
+    background: rgba(201,146,59,0.1);
+    border: 1px solid rgba(201,146,59,0.3);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gold-accessible);
+    white-space: nowrap;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* ── PROJECTS ── */
+  #projets {
+    background: var(--navy);
+    }
+  #projets h2 { color: white; }
+  #projets .section-intro { color: rgba(255,255,255,0.48); max-width: 640px; }
+
+  .project-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+
+  .project-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.07);
+    padding: 40px 30px;
+    transition: background 0.25s, transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+    cursor: default;
+  }
+
+  .project-card:hover {
+    background: rgba(255,255,255,0.09);
+    transform: translateY(-4px);
+    border-color: rgba(201,146,59,0.35);
+    box-shadow:
+      0 8px 24px rgba(0,0,0,0.25),
+      0 2px 6px rgba(0,0,0,0.15),
+      inset 0 1px 0 rgba(255,255,255,0.06);
+  }
+
+  .project-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 42px;
+    font-weight: 600;
+    color: rgba(201,146,59,0.25);
+    line-height: 1;
+    margin-bottom: 20px;
+  }
+
+  .project-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 21px;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 5px;
+    line-height: 1.25;
+  }
+
+  .project-org {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 22px;
+  }
+
+  .epbm { display: flex; flex-direction: column; }
+
+  .epbm-item { padding: 14px 0; border-top: 1px solid rgba(255,255,255,0.07); }
+
+  /* Executive summary — always visible */
+  .epbm-summary {}
+
+  /* Method drawer — hidden by default */
+  .epbm-drawer {
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 0.28s ease, opacity 0.22s ease;
+  }
+
+  .epbm-drawer.open {
+    max-height: 600px;
+    opacity: 1;
+  }
+
+  /* Toggle button */
+  .epbm-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 16px;
+    padding: 8px 18px;
+    background: transparent;
+    border: 1px solid rgba(201,146,59,0.4);
+    color: var(--gold-light);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+  }
+
+  .epbm-toggle:hover {
+    background: rgba(201,146,59,0.1);
+    border-color: rgba(201,146,59,0.7);
+  }
+
+  .epbm-toggle svg {
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+  }
+
+  .epbm-toggle.open svg { transform: rotate(180deg); }
+
+  /* Label "Voir" / "Masquer" géré par CSS data-state — évite conflit data-lang */
+  .epbm-toggle .lbl-open  { display: inline; }
+  .epbm-toggle .lbl-close { display: none; }
+  .epbm-toggle.open .lbl-open  { display: none; }
+  .epbm-toggle.open .lbl-close { display: inline; }
+
+  /* KPI badge — prominent in summary */
+  .kpi-badge {
+    display: inline-block;
+    margin: 10px 0 4px;
+    padding: 6px 14px;
+    background: rgba(201,146,59,0.12);
+    border: 1px solid rgba(201,146,59,0.3);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--gold-light);
+    letter-spacing: 0.02em;
+  }
+
+  .epbm-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 5px;
+    opacity: 0.7;
+  }
+
+  .epbm-text { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.65; }
+  .epbm-text strong { color: rgba(255,255,255,0.88); font-weight: 500; }
+
+  /* ── TESTIMONIAL ── */
+  #temoignage { background: white; padding: 80px 8vw; }
+
+  .testimonial-inner { max-width: 700px; margin: 0 auto; text-align: center; }
+
+  .quote-icon { margin: 0 auto 24px; opacity: 0.18; }
+
+  .testimonial-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(20px, 2.4vw, 27px);
+    font-weight: 500;
+    color: var(--navy);
+    line-height: 1.5;
+    margin-bottom: 24px;
+  }
+
+  .testimonial-source {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .testimonial-badge {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 4px 16px;
+    border: 1px solid var(--border);
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+  }
+
+  /* ── CONTACT ── */
+  .contact-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 100px;
+    align-items: center;
+  }
+
+  .contact-left h2 { margin-bottom: 18px; }
+
+  .contact-left p {
+    font-size: 16px;
+    color: var(--muted);
+    line-height: 1.8;
+    margin-bottom: 36px;
+    max-width: 420px;
+  }
+
+  .contact-infos { display: flex; flex-direction: column; gap: 16px; }
+
+  .contact-info-item { display: flex; align-items: flex-start; gap: 14px; }
+
+  .contact-info-icon {
+    width: 38px; height: 38px;
+    background: white;
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .contact-info-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 2px;
+  }
+
+  .contact-info-value {
+    font-size: 15px;
+    color: var(--navy);
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .contact-info-value:hover { color: var(--gold-accessible); }
+
+  .contact-right {
+    background: var(--navy);
+    padding: 52px 44px;
+    position: relative;
+    overflow: hidden;
+    }
+
+  .contact-right::before {
+    content: '"';
+    position: absolute;
+    top: -20px; right: 28px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 160px;
+    color: rgba(201,146,59,0.09);
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .contact-right h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: white;
+    line-height: 1.3;
+    margin-bottom: 14px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .contact-right p {
+    font-size: 15px;
+    color: rgba(255,255,255,0.48);
+    line-height: 1.8;
+    margin-bottom: 28px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cta-final {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 30px;
+    background: var(--gold);
+    color: white;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    transition: background 0.2s, transform 0.15s;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cta-final:hover { background: #b0822f; transform: translateY(-1px); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy);
+    padding: 26px 8vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+
+  footer span { font-size: 12px; color: rgba(255,255,255,0.28); }
+
+  .footer-links { display: flex; gap: 22px; }
+
+  .footer-links a {
+    font-size: 12px;
+    color: rgba(255,255,255,0.28);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--gold-light); }
+
+  /* ── SCROLL OFFSET — compense la nav fixe de 60px ── */
+  section[id], div[id="top"] {
+    scroll-margin-top: 68px;
+  }
+
+  /* ── BACK TO TOP ── */
+  #back-to-top {
+    position: fixed;
+    bottom: 32px; right: 32px;
+    z-index: 9999;
+    width: 48px; height: 48px;
+    background: var(--navy);
+    border: 2px solid rgba(255,255,255,0.15);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s, background 0.25s, border-color 0.25s;
+    box-shadow: 0 4px 20px rgba(27,53,87,0.4);
+  }
+  #back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+  }
+  /* On dark sections — flip to light button */
+  #back-to-top.on-dark {
+    background: #F8F7F4;
+    border-color: rgba(27,53,87,0.2);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  }
+  #back-to-top.on-dark svg { stroke: #1B3557; }
+  #back-to-top:hover            { background: var(--gold); border-color: rgba(255,255,255,0.25); }
+  #back-to-top:hover svg        { stroke: white; }
+  #back-to-top.on-dark:hover    { background: var(--gold); border-color: rgba(255,255,255,0.25); }
+  #back-to-top.on-dark:hover svg { stroke: white; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .fade-up   { animation: fadeUp 0.7s ease both; }
+  .fade-up-2 { animation: fadeUp 0.7s 0.15s ease both; }
+  .fade-up-3 { animation: fadeUp 0.7s 0.30s ease both; }
+  .fade-up-4 { animation: fadeUp 0.7s 0.45s ease both; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 960px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-visual { min-height: 340px; padding: 60px 8vw; }
+    .about-grid { grid-template-columns: 1fr; gap: 48px; }
+    .skills-sidebar { position: static; }
+    .project-cards { grid-template-columns: 1fr; }
+    .contact-inner { grid-template-columns: 1fr; gap: 56px; }
+  }
+
+  @media (max-width: 640px) {
+    .nav-right li:not(:last-child):not(:nth-last-child(2)) { display: none; }
+    section { padding: 72px 5vw; }
+    .hero-content { padding: 56px 5vw; }
+    .contact-right { padding: 36px 24px; }
+  }
+</style>
+</head>
+<body class="lang-fr" onload="document.body.className='lang-'+(window.__initLang||'fr')"  >
+
+<!-- ══════════════════════════════════
+     NAV
+══════════════════════════════════ -->
+<nav>
+  <a href="#top" class="nav-logo">Rania El Bahri</a>
+
+  <ul class="nav-right">
+    <li><a href="#profil"   data-lang="fr">Profil</a><a href="#profil"   data-lang="en">Profile</a></li>
+    <li><a href="#projets"  data-lang="fr">Projets</a><a href="#projets" data-lang="en">Projects</a></li>
+    <li><a href="#contact"  data-lang="fr">Contact</a><a href="#contact" data-lang="en">Contact</a></li>
+    <li>
+      <a href="CV_Rania_El_Bahri_FR.pdf"
+         download="CV_Rania_El_Bahri_FR.pdf"
+         class="nav-cv-btn" data-lang="fr">
+        <svg aria-hidden="true" focusable="false" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        CV PDF
+      </a>
+      <a href="CV_Rania_El_Bahri_EN.pdf"
+         download="CV_Rania_El_Bahri_EN.pdf"
+         class="nav-cv-btn" data-lang="en">
+        <svg aria-hidden="true" focusable="false" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Resume PDF
+      </a>
+    </li>
+    <li>
+      <!-- Language switch -->
+      <div class="lang-switch">
+        <button class="lang-btn active" id="btn-fr" onclick="setLang('fr')">FR</button>
+        <button class="lang-btn"        id="btn-en" onclick="setLang('en')">EN</button>
+      </div>
+    </li>
+  </ul>
+</nav>
+
+<!-- ══════════════════════════════════
+     HERO
+══════════════════════════════════ -->
+<section class="hero" id="top">
+  <div class="hero-content">
+
+    <!-- FR -->
+    <span class="hero-tag fade-up" data-lang="fr">Alternance Finance / CDG · Septembre 2026 · 3 semaines entreprise / 1 semaine école</span>
+    <!-- EN -->
+    <span class="hero-tag fade-up" data-lang="en">Work-study · Finance / Management Control · September 2026 · 3 weeks company / 1 week school</span>
+
+    <h1 class="fade-up-2">
+      <span data-lang="fr">De la donnée brute<br>à la décision financière.</span>
+      <span data-lang="en">From raw data<br>to financial decision.</span>
+    </h1>
+
+    <!-- FR golden sentence — scindée : accroche courte + contexte -->
+    <p class="hero-golden fade-up-3" data-lang="fr">
+      Je transforme des données financières en recommandations actionnables.
+    </p>
+    <p class="hero-sub fade-up-3" data-lang="fr">
+      Master CCF · EM Strasbourg · Exposée aux environnements bancaire (Wafasalaf) et financier dès ma Licence — disponible dès septembre 2026 · Rythme : 3 sem. entreprise / 1 sem. école · Durée : 12 mois.
+    </p>
+    <!-- EN golden sentence -->
+    <p class="hero-golden fade-up-3" data-lang="en">
+      I turn financial data into actionable recommendations.
+    </p>
+    <p class="hero-sub fade-up-3" data-lang="en">
+      Master CCF · EM Strasbourg · Proven exposure to banking (Wafasalaf) and financial environments since my Bachelor's — available from September 2026 · Rhythm: 3 weeks company / 1 week school · Duration: 12 months.
+    </p>
+
+    <div class="cta-group fade-up-4">
+      <a href="#contact" class="btn-primary">
+        <span data-lang="fr">Discutons alternance</span>
+        <span data-lang="en">Let's discuss your opening</span>
+        <svg aria-hidden="true" focusable="false" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a href="CV_Rania_El_Bahri_FR.pdf" download="CV_Rania_El_Bahri_FR.pdf" class="btn-secondary" data-lang="fr">
+        <svg aria-hidden="true" focusable="false" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Télécharger le CV
+      </a>
+      <a href="CV_Rania_El_Bahri_EN.pdf" download="CV_Rania_El_Bahri_EN.pdf" class="btn-secondary" data-lang="en">
+        <svg aria-hidden="true" focusable="false" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download Resume
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+
+    <!-- ── Losange marocain abstrait — filigrane doré ── -->
+    <svg class="diamond-pattern" width="56" height="56" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+      <!-- Losange central -->
+      <polygon points="60,8 112,60 60,112 8,60" stroke="#C9923B" stroke-width="1.2" fill="none"/>
+      <!-- Losange intérieur -->
+      <polygon points="60,24 96,60 60,96 24,60" stroke="#C9923B" stroke-width="0.8" fill="none"/>
+      <!-- Losange minimal -->
+      <polygon points="60,40 80,60 60,80 40,60" stroke="#C9923B" stroke-width="0.6" fill="none"/>
+      <!-- Points aux coins -->
+      <circle cx="60" cy="8"   r="2" fill="#C9923B"/>
+      <circle cx="112" cy="60" r="2" fill="#C9923B"/>
+      <circle cx="60" cy="112" r="2" fill="#C9923B"/>
+      <circle cx="8" cy="60"  r="2" fill="#C9923B"/>
+      <!-- Croisillons intérieurs — inspiration zellij géométrique -->
+      <line x1="60" y1="8"   x2="60" y2="24"  stroke="#C9923B" stroke-width="0.6"/>
+      <line x1="112" y1="60" x2="96" y2="60"  stroke="#C9923B" stroke-width="0.6"/>
+      <line x1="60" y1="112" x2="60" y2="96"  stroke="#C9923B" stroke-width="0.6"/>
+      <line x1="8" y1="60"   x2="24" y2="60"  stroke="#C9923B" stroke-width="0.6"/>
+    </svg>
+
+    <div class="photo-wrap">
+      <div class="photo-frame">
+        <img src="photo.jpg" alt="Rania El Bahri — Étudiante Master CCF EM Strasbourg" style="width:100%;height:100%;object-fit:cover;object-position:center top;" loading="eager"/>
+      </div>
+      <span class="photo-caption" style="display:none" data-lang="fr"></span>
+      <span class="photo-caption" style="display:none" data-lang="en"></span>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-num">3</div>
+        <div class="stat-label" data-lang="fr">Expériences professionnelles</div>
+        <div class="stat-label" data-lang="en">Professional experiences</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" style="font-size:28px; line-height:1.1;">Sept.<br>2026</div>
+        <div class="stat-label" data-lang="fr">Disponible en alternance</div>
+        <div class="stat-label" data-lang="en">Available for work-study</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">3</div>
+        <div class="stat-label" data-lang="fr">Langues maîtrisées</div>
+        <div class="stat-label" data-lang="en">Languages spoken</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" style="font-size:30px;">AMF</div>
+        <div class="stat-label" data-lang="fr">Certification en cours</div>
+        <div class="stat-label" data-lang="en">Certification in progress</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     PROFIL / ABOUT
+══════════════════════════════════ -->
+<section id="profil">
+  <div class="section-eyebrow">
+    <span data-lang="fr">Profil</span>
+    <span data-lang="en">Profile</span>
+  </div>
+
+  <h2>
+    <span data-lang="fr">Une méthode avant le diplôme</span>
+    <span data-lang="en">Method before the degree</span>
+  </h2>
+
+  <div class="about-grid">
+    <div class="about-narrative">
+
+      <!-- FR — première personne, ton direct -->
+      <p data-lang="fr">
+        Avant l'EM Strasbourg, il y avait déjà <strong>Wafasalaf</strong> — un back-office bancaire réel, des dossiers de financement à fiabiliser, des décisions qui dépendaient de la donnée. J'ai appris là-bas ce qu'aucun cours ne peut enseigner : le coût d'une erreur dans un système réglementé.
+      </p>
+      <p data-lang="fr">
+        Chez <strong>Xcopy</strong>, c'est la rigueur procédurale. Deux mois pour refondre un système d'archivage, réduire le temps de recherche documentaire de 8 à 2 minutes, et livrer dans les délais. Pas de bruit. Juste du résultat.
+      </p>
+      <p data-lang="fr">
+        Aujourd'hui en <strong>Master CCF à l'EM Strasbourg</strong>, je prépare la certification AMF (mars 2026). Parce qu'analyser sans comprendre le cadre réglementaire, ça ne suffit pas.
+      </p>
+
+      <!-- EN — first person -->
+      <p data-lang="en">
+        Before EM Strasbourg, there was already <strong>Wafasalaf</strong> — a real banking back-office, client financing files to validate, decisions that depended on data quality. That's where I learned what no course can teach: the cost of an error in a regulated system.
+      </p>
+      <p data-lang="en">
+        At <strong>Xcopy</strong>, it was procedural rigor. Two months to overhaul an archiving system, cut document retrieval time from 8 to 2 minutes, delivered on schedule. No noise. Just results.
+      </p>
+      <p data-lang="en">
+        Now in my <strong>Master's CCF at EM Strasbourg</strong>, I am preparing the AMF certification (March 2026). Because analyzing without understanding the regulatory framework is not enough.
+      </p>
+
+      <div class="divider">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true" focusable="false">
+          <polygon points="6,1 11,6 6,11 1,6" stroke="#96611A" stroke-width="1.2" fill="rgba(150,97,26,0.15)"/>
+          <polygon points="6,3.5 8.5,6 6,8.5 3.5,6" stroke="#96611A" stroke-width="0.7" fill="none"/>
+        </svg>
+      </div>
+
+      <!-- Dual Timeline — Expériences | Formation -->
+      <div class="dual-timeline">
+
+        <!-- LEFT: Expériences pro -->
+        <div>
+          <div class="tl-col-label exp" data-lang="fr">Expériences</div>
+          <div class="tl-col-label exp" data-lang="en">Experience</div>
+          <div class="timeline tl-exp">
+            <div class="timeline-item featured">
+              <span class="featured-badge" data-lang="fr">Expérience bancaire clé</span>
+              <span class="featured-badge" data-lang="en">Key banking experience</span>
+              <div class="timeline-date" data-lang="fr">Juin – Août 2025</div>
+              <div class="timeline-date" data-lang="en">June – August 2025</div>
+              <div class="timeline-title" data-lang="fr">Stage Finance — Fiabilisation des données de financement</div>
+              <div class="timeline-title" data-lang="en">Finance Internship — Financing data reliability</div>
+              <div class="timeline-org" data-lang="fr">Wafasalaf · Casablanca, Maroc</div>
+              <div class="timeline-org" data-lang="en">Wafasalaf · Casablanca, Morocco</div>
+              <div class="timeline-desc" data-lang="fr">Suivi de dossiers clients, traitement administratif et financier, fiabilisation des données en environnement bancaire réglementé.</div>
+              <div class="timeline-desc" data-lang="en">Client file monitoring, financial processing, data reliability in a regulated banking environment.</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-date" data-lang="fr">Sep. 2024 – Mai 2025</div>
+              <div class="timeline-date" data-lang="en">Sep. 2024 – May 2025</div>
+              <div class="timeline-title" data-lang="fr">Assistante Gestion — Suivi de trésorerie & cycle client</div>
+              <div class="timeline-title" data-lang="en">Management Assistant — Cash flow & client cycle</div>
+              <div class="timeline-org" data-lang="fr">Auto-école — Casablanca, Maroc</div>
+              <div class="timeline-org" data-lang="en">Driving School — Casablanca, Morocco</div>
+              <div class="timeline-desc" data-lang="fr">Suivi des paiements, gestion des dossiers financiers, coordination d'équipe.</div>
+              <div class="timeline-desc" data-lang="en">Payment tracking, financial document management, team coordination.</div>
+            </div>
+            <div class="timeline-item" style="padding-bottom:0">
+              <div class="timeline-date" data-lang="fr">Juin – Juil. 2024</div>
+              <div class="timeline-date" data-lang="en">June – July 2024</div>
+              <div class="timeline-title" data-lang="fr">Stage — Optimisation des processus & réduction des coûts opérationnels</div>
+              <div class="timeline-title" data-lang="en">Internship — Process optimization & operational cost reduction</div>
+              <div class="timeline-org" data-lang="fr">Xcopy · Solutions bureautiques · Casablanca, Maroc</div>
+              <div class="timeline-org" data-lang="en">Xcopy · Office Solutions · Casablanca, Morocco</div>
+              <div class="timeline-desc" data-lang="fr">Refonte du système d'archivage documentaire dans le strict respect des délais.</div>
+              <div class="timeline-desc" data-lang="en">Document archiving system overhaul in strict compliance with deadlines.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: Formation -->
+        <div>
+          <div class="tl-col-label edu" data-lang="fr">Formation</div>
+          <div class="tl-col-label edu" data-lang="en">Education</div>
+          <div class="timeline tl-edu">
+            <div class="timeline-item">
+              <div class="timeline-date" data-lang="fr">Sept. 2025 → Sept. 2027 (en cours)</div>
+              <div class="timeline-date" data-lang="en">Sept. 2025 → Sept. 2027 (ongoing)</div>
+              <div class="timeline-title" data-lang="fr">Master Comptabilité – Contrôle – Finance</div>
+              <div class="timeline-title" data-lang="en">Master's — Accounting, Control & Finance</div>
+              <div class="timeline-org" data-lang="fr">EM Strasbourg Business School</div>
+              <div class="timeline-org" data-lang="en">EM Strasbourg Business School</div>
+              <div class="timeline-desc" data-lang="fr">Programme Grande École · Certification AMF en cours (mars 2026)</div>
+              <div class="timeline-desc" data-lang="en">Grande École programme · AMF certification in progress (March 2026)</div>
+            </div>
+            <div class="timeline-item" style="padding-bottom:0">
+              <div class="timeline-date" data-lang="fr">Sept. 2022 → Juil. 2025</div>
+              <div class="timeline-date" data-lang="en">Sept. 2022 → Jul. 2025</div>
+              <div class="timeline-title" data-lang="fr">Licence Management — Finance & Comptabilité</div>
+              <div class="timeline-title" data-lang="en">Bachelor's — Finance & Accounting</div>
+              <div class="timeline-org" data-lang="fr">Université internationale de Casablanca</div>
+              <div class="timeline-org" data-lang="en">International University of Casablanca</div>
+              <div class="timeline-desc" data-lang="fr">Mention Très Bien</div>
+              <div class="timeline-desc" data-lang="en">Distinction — With Honours</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="skills-sidebar">
+      <div class="skills-group">
+        <div class="skills-group-label" data-lang="fr">Langues</div>
+        <div class="skills-group-label" data-lang="en">Languages</div>
+        <div class="lang-item">
+          <span class="lang-name" data-lang="fr">Français</span>
+          <span class="lang-name" data-lang="en">French</span>
+          <div class="lang-bar-track" id="lang-bar-fr" role="img" aria-label="Français — C2 Courant">
+            <div class="lang-bar-fill" style="width:100%"></div>
+          </div>
+          <span class="lang-level">C2</span>
+        </div>
+        <div class="lang-item">
+          <span class="lang-name" data-lang="fr">Arabe</span>
+          <span class="lang-name" data-lang="en">Arabic</span>
+          <div class="lang-bar-track" id="lang-bar-ar" role="img" aria-label="Arabe — Langue maternelle">
+            <div class="lang-bar-fill" style="width:100%"></div>
+          </div>
+          <span class="lang-level" data-lang="fr">Maternel</span>
+          <span class="lang-level" data-lang="en">Native</span>
+        </div>
+        <div class="lang-item">
+          <span class="lang-name" data-lang="fr">Anglais</span>
+          <span class="lang-name" data-lang="en">English</span>
+          <div class="lang-bar-track" id="lang-bar-en" role="img" aria-label="Anglais — B2 Professionnel">
+            <div class="lang-bar-fill" style="width:72%"></div>
+          </div>
+          <span class="lang-level">B2</span>
+        </div>
+      </div>
+
+      <!-- FINANCE & COMPTABILITÉ -->
+      <div class="skills-group">
+        <div class="skills-group-label" data-lang="fr">Finance & Comptabilité</div>
+        <div class="skills-group-label" data-lang="en">Finance & Accounting</div>
+        <div class="skill-tags">
+          <span class="skill-tag" data-lang="fr">Analyse financière</span>
+          <span class="skill-tag" data-lang="en">Financial analysis</span>
+          <span class="skill-tag" data-lang="fr">Comptabilité générale (Sage 100)</span>
+          <span class="skill-tag" data-lang="en">General accounting (Sage 100)</span>
+          <span class="skill-tag" data-lang="fr">Contrôle de gestion</span>
+          <span class="skill-tag" data-lang="en">Management control</span>
+          <span class="skill-tag" data-lang="fr">Suivi administratif & financier</span>
+          <span class="skill-tag" data-lang="en">Admin. & financial monitoring</span>
+          <span class="skill-tag" data-lang="fr">Marchés financiers</span>
+          <span class="skill-tag" data-lang="en">Financial markets</span>
+        </div>
+      </div>
+
+      <!-- OUTILS -->
+      <div class="skills-group">
+        <div class="skills-group-label" data-lang="fr">Outils</div>
+        <div class="skills-group-label" data-lang="en">Tools</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Excel — <span data-lang="fr">Recherche V, TCD</span><span data-lang="en">VLOOKUP, Pivot tables</span></span>
+          <span class="skill-tag">Sage 100 Comptabilité</span>
+          <span class="skill-tag" data-lang="fr">Pack Office</span>
+          <span class="skill-tag" data-lang="en">Microsoft Office</span>
+          <span class="skill-tag">Python <span data-lang="fr">(notions)</span><span data-lang="en">(basics)</span></span>
+          <span class="skill-tag">Vensim <span data-lang="fr">(modélisation)</span><span data-lang="en">(simulation modelling)</span></span>
+        </div>
+      </div>
+
+      <!-- CERTIFICATIONS -->
+      <div class="skills-group">
+        <div class="skills-group-label" data-lang="fr">Certification</div>
+        <div class="skills-group-label" data-lang="en">Certification</div>
+        <div class="skill-tags">
+          <span class="skill-tag gold">
+            <span data-lang="fr">AMF — Marchés financiers · mars 2026</span>
+            <span data-lang="en">AMF — Financial markets · March 2026</span>
+          </span>
+        </div>
+      </div>
+
+      <!-- SOFT SKILLS -->
+      <div class="skills-group">
+        <div class="skills-group-label" data-lang="fr">Savoir-être</div>
+        <div class="skills-group-label" data-lang="en">Soft skills</div>
+        <div class="skill-tags">
+          <span class="skill-tag" data-lang="fr">Rigueur procédurale</span>
+          <span class="skill-tag" data-lang="en">Procedural rigor</span>
+          <span class="skill-tag" data-lang="fr">Esprit d'analyse</span>
+          <span class="skill-tag" data-lang="en">Analytical mindset</span>
+          <span class="skill-tag" data-lang="fr">Autonomie</span>
+          <span class="skill-tag" data-lang="en">Autonomy</span>
+          <span class="skill-tag" data-lang="fr">Travail en équipe</span>
+          <span class="skill-tag" data-lang="en">Teamwork</span>
+          <span class="skill-tag" data-lang="fr">Sens du détail</span>
+          <span class="skill-tag" data-lang="en">Attention to detail</span>
+        </div>
+      </div>
+
+      <div class="skills-group">
+        <div class="skills-group-label" data-lang="fr">Formation</div>
+        <div class="skills-group-label" data-lang="en">Education</div>
+        <div class="skill-tags">
+          <span class="skill-tag highlight">Master CCF — EM Strasbourg</span>
+          <span class="skill-tag" data-lang="fr">Licence Finance — UIC Casablanca</span>
+          <span class="skill-tag" data-lang="en">Bachelor Finance — UIC Casablanca</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     PROJETS
+══════════════════════════════════ -->
+<section id="projets">
+  <div class="section-eyebrow" style="color:rgba(232,176,106,0.85)">
+    <span data-lang="fr">Projets business</span>
+    <span data-lang="en">Business cases</span>
+  </div>
+
+  <h2>
+    <span data-lang="fr">Expériences analysées</span>
+    <span data-lang="en">Analyzed experiences</span>
+  </h2>
+
+  <p class="section-intro" data-lang="fr">
+    Chaque expérience documentée selon le format EPBM : Problème · Méthodologie · Insights · Recommandation stratégique.
+    60 % insight business, 40 % explication des méthodes.
+  </p>
+  <p class="section-intro" data-lang="en">
+    Each experience documented using the EPBM framework: Problem · Methodology · Insights · Strategic recommendation.
+    60% business insight, 40% methodology breakdown.
+  </p>
+
+  <div class="project-cards">
+
+    <!-- PROJECT 01 — Wafasalaf · Expérience bancaire la plus stratégique -->
+    <div class="project-card">
+      <div class="project-num">01</div>
+      <div class="project-title" data-lang="fr">Fiabilisation des données de financement</div>
+      <div class="project-title" data-lang="en">Financing data reliability</div>
+      <div class="project-org">Wafasalaf · Institut financier · 2025</div>
+
+      <div class="epbm-summary">
+        <div class="epbm-item" style="border-top:1px solid rgba(255,255,255,0.07); padding-top:14px;">
+          <div class="epbm-label" data-lang="fr">Problème</div>
+          <div class="epbm-label" data-lang="en">Problem</div>
+          <div class="epbm-text" data-lang="fr">Suivi de ~40 dossiers clients/semaine en back-office bancaire réglementé — chaque anomalie de donnée pouvait bloquer ou retarder une décision de financement.</div>
+          <div class="epbm-text" data-lang="en">~40 client files/week in a regulated banking back-office — each data anomaly could block or delay a financing decision.</div>
+        </div>
+        <div class="epbm-item">
+          <div class="epbm-label" data-lang="fr">Résultat</div><div class="epbm-label" data-lang="en">Result</div>
+          <div class="kpi-badge" data-lang="fr">Taux d'anomalies : −67 % · Allers-retours ÷ 3</div>
+          <div class="kpi-badge" data-lang="en">Anomaly rate : −67% · Back-and-forth ÷ 3</div>
+        </div>
+      </div>
+
+      <button class="epbm-toggle" onclick="toggleEpbm(this)" aria-expanded="false">
+        <span class="lbl-open"  data-lang="fr">Voir la méthode</span>
+        <span class="lbl-close" data-lang="fr">Masquer la méthode</span>
+        <span class="lbl-open"  data-lang="en">See the method</span>
+        <span class="lbl-close" data-lang="en">Hide the method</span>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+
+      <div class="epbm-drawer">
+        <div class="epbm-item">
+          <div class="epbm-label" data-lang="fr">Méthodologie</div>
+          <div class="epbm-label" data-lang="en">Methodology</div>
+          <div class="epbm-text" data-lang="fr">Mise en place d'une grille d'audit sur <strong>3 points de contrôle</strong> : cohérence des données client, complétude des pièces justificatives, conformité au cadre réglementaire — appliquée avant toute transmission aux équipes commerciales.</div>
+          <div class="epbm-text" data-lang="en">Implemented a 3-checkpoint audit grid: client data consistency, document completeness, regulatory compliance — applied before every handover to commercial teams.</div>
+        </div>
+        <div class="epbm-item">
+          <div class="epbm-label">Insight</div>
+          <div class="epbm-text" data-lang="fr">La standardisation du contrôle en amont réduit le taux d'anomalies de <strong>~15 % à ~5 %</strong> et divise par 3 les allers-retours — chaque aller-retour évité = une décision de financement accélérée.</div>
+          <div class="epbm-text" data-lang="en">Upstream standardization reduced the anomaly rate from <strong>~15% to ~5%</strong>, cutting back-and-forth by 3× — each avoided exchange means a faster financing decision.</div>
+        </div>
+        <div class="epbm-item">
+          <div class="epbm-label" data-lang="fr">Recommandation</div>
+          <div class="epbm-label" data-lang="en">Recommendation</div>
+          <div class="epbm-text" data-lang="fr">Déployer la grille sur l'ensemble du back-office et viser <strong>un taux d'anomalies &lt; 3 %</strong> — réduisant le délai moyen de traitement d'une journée et sécurisant la conformité réglementaire.</div>
+          <div class="epbm-text" data-lang="en">Deploy the grid across the full back-office, targeting <strong>an anomaly rate below 3%</strong> — cutting average processing time by one day and strengthening regulatory compliance.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECT 02 — Auto-école · Trésorerie & cycle client (remonté en 2ème position) -->
+    <div class="project-card">
+      <div class="project-num">02</div>
+      <div class="project-title" data-lang="fr">Suivi de trésorerie & cycle client</div>
+      <div class="project-title" data-lang="en">Cash flow management & client cycle</div>
+      <div class="project-org" data-lang="fr">Structure multi-clients · Casablanca · 2024–2025</div>
+      <div class="project-org" data-lang="en">Multi-client structure · Casablanca · 2024–2025</div>
+
+      <div class="epbm-summary">
+        <div class="epbm-item" style="border-top:1px solid rgba(255,255,255,0.07); padding-top:14px;">
+          <div class="epbm-label" data-lang="fr">Problème</div>
+          <div class="epbm-label" data-lang="en">Problem</div>
+          <div class="epbm-text" data-lang="fr">~20 dossiers actifs/mois avec encaissements hétérogènes (espèces, chèque, virement) — risque de décalage de trésorerie et d'erreurs d'imputation sur 9 mois.</div>
+          <div class="epbm-text" data-lang="en">~20 active files/month with mixed payment methods (cash, cheque, transfer) — cash flow gap risk and imputation errors over 9 months.</div>
+        </div>
+        <div class="epbm-item">
+          <div class="epbm-label" data-lang="fr">Résultat</div><div class="epbm-label" data-lang="en">Result</div>
+          <div class="kpi-badge" data-lang="fr">0 impayé non détecté · 9 mois · Saisie : 2h → 20 min</div>
+          <div class="kpi-badge" data-lang="en">0 undetected overdue · 9 months · Entry : 2h → 20 min</div>
+        </div>
+      </div>
+
+      <button class="epbm-toggle" onclick="toggleEpbm(this)" aria-expanded="false">
+        <span class="lbl-open"  data-lang="fr">Voir la méthode</span>
+        <span class="lbl-close" data-lang="fr">Masquer la méthode</span>
+        <span class="lbl-open"  data-lang="en">See the method</span>
+        <span class="lbl-close" data-lang="en">Hide the method</span>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+
+      <div class="epbm-drawer">
+        <div class="epbm-item">
+          <div class="epbm-label" data-lang="fr">Méthodologie</div>
+          <div class="epbm-label" data-lang="en">Methodology</div>
+          <div class="epbm-text" data-lang="fr"><strong>Tableau Excel hebdomadaire</strong> centralisant encaissements, échéances et soldes par client — rapprochement effectué chaque vendredi avant clôture de semaine.</div>
+          <div class="epbm-text" data-lang="en"><strong>Weekly Excel tracker</strong> centralizing payments, due dates and client balances — reconciliation performed every Friday before week-end close.</div>
+        </div>
+        <div class="epbm-item">
+          <div class="epbm-label">Insight</div>
+          <div class="epbm-text" data-lang="fr">Un suivi hebdomadaire structuré génère les mêmes bénéfices qu'un contrôle de gestion en grande structure : <strong>visibilité permanente, traçabilité complète, zéro surprise en fin de mois.</strong></div>
+          <div class="epbm-text" data-lang="en">A structured weekly tracker delivers the same outcomes as corporate management control: <strong>permanent visibility, full traceability, zero end-of-month surprises.</strong></div>
+        </div>
+        <div class="epbm-item">
+          <div class="epbm-label" data-lang="fr">Recommandation</div>
+          <div class="epbm-label" data-lang="en">Recommendation</div>
+          <div class="epbm-text" data-lang="fr">Structurer un processus de rapprochement mensuel formalisé pour fiabiliser la clôture et détecter les écarts de trésorerie en temps réel.</div>
+          <div class="epbm-text" data-lang="en">Implement a formalized monthly reconciliation process to secure the close and detect cash flow discrepancies in real time.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECT 03 — Xcopy · Optimisation processus + coût évité quantifié -->
+    <div class="project-card">
+      <div class="project-num">03</div>
+      <div class="project-title" data-lang="fr">Optimisation des processus & réduction des coûts opérationnels</div>
+      <div class="project-title" data-lang="en">Process optimization & operational cost reduction</div>
+      <div class="project-org">Xcopy · Solutions bureautiques · 2024</div>
+
+      <div class="epbm-summary">
+        <div class="epbm-item" style="border-top:1px solid rgba(255,255,255,0.07); padding-top:14px;">
+          <div class="epbm-label" data-lang="fr">Problème</div>
+          <div class="epbm-label" data-lang="en">Problem</div>
+          <!-- [EST.] +200 docs non classés — coût calculé sur base 5 pers × 6 min/jour × 250j × 18€/h -->
+          <div class="epbm-text" data-lang="fr">+200 documents non classés, allongeant les délais de traitement client — équivalent à <strong>~375 heures/an perdues</strong> en recherche documentaire pour une équipe de 5 personnes.</div>
+          <div class="epbm-text" data-lang="en">200+ unclassified documents extending client processing times — equivalent to <strong>~375 hours/year lost</strong> in document retrieval for a 5-person team.</div>
+        </div>
+        <div class="epbm-item">
+          <div class="epbm-label" data-lang="fr">Résultat</div><div class="epbm-label" data-lang="en">Result</div>
+          <!-- [EST.] 5 pers × 6 min/j × 250j = 125h/an → ×18€/h = 2250€/an de coût évité -->
+          <div class="kpi-badge" data-lang="fr">8 min → 2 min · ~2 250 €/an de coût évité</div>
+          <div class="kpi-badge" data-lang="en">8 min → 2 min · ~€2,250/year in avoided cost</div>
+        </div>
+      </div>
+
+      <button class="epbm-toggle" onclick="toggleEpbm(this)" aria-expanded="false">
+        <span class="lbl-open"  data-lang="fr">Voir la méthode</span>
+        <span class="lbl-close" data-lang="fr">Masquer la méthode</span>
+        <span class="lbl-open"  data-lang="en">See the method</span>
+        <span class="lbl-close" data-lang="en">Hide the method</span>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+
+      <div class="epbm-drawer">
+        <div class="epbm-item">
+          <div class="epbm-label" data-lang="fr">Méthodologie</div>
+          <div class="epbm-label" data-lang="en">Methodology</div>
+          <div class="epbm-text" data-lang="fr">Refonte du plan de classement sur <strong>5 catégories documentaires</strong> — backlog intégral (+200 documents) traité en 6 semaines dans le strict respect des délais contractuels.</div>
+          <div class="epbm-text" data-lang="en">Redesigned filing structure across <strong>5 document categories</strong> — full backlog (200+ documents) cleared in 6 weeks within contractual deadlines.</div>
+        </div>
+        <div class="epbm-item">
+          <div class="epbm-label">Insight</div>
+          <div class="epbm-text" data-lang="fr">Le coût d'un processus désorganisé est invisible jusqu'à ce qu'on le calcule : <strong>5 personnes × 6 min/jour × 250 jours = 125 h/an</strong>, soit ~2 250 € de masse salariale gaspillée en recherche documentaire.</div>
+          <div class="epbm-text" data-lang="en">The cost of a disorganized process is invisible until measured: <strong>5 people × 6 min/day × 250 days = 125 h/year</strong>, ~€2,250 in wasted payroll on document retrieval.</div>
+        </div>
+        <div class="epbm-item">
+          <div class="epbm-label" data-lang="fr">Recommandation</div>
+          <div class="epbm-label" data-lang="en">Recommendation</div>
+          <div class="epbm-text" data-lang="fr">Maintenir la rigueur par une <strong>routine d'archivage de 30 min/semaine</strong> — coût de maintenance : ~26 h/an, ROI du processus : &gt; 4,8× par rapport au coût initial.</div>
+          <div class="epbm-text" data-lang="en">Sustain rigor through a <strong>30-min/week archiving routine</strong> — maintenance cost: ~26 h/year, process ROI: &gt;4.8× vs. the initial time investment.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- TÉMOIGNAGE : section retirée en attente d'une citation réelle du manager.
+     Pour la réactiver, décommenter ce bloc et remplacer le texte.
+<section id="temoignage" style="background:white; padding:80px 8vw;">
+  ...
+</section>
+-->
+
+<!-- ══════════════════════════════════
+     TRANSITION PROJETS → CONTACT
+══════════════════════════════════ -->
+<div style="background:var(--navy); padding:0 8vw 60px; display:flex; align-items:center; gap:20px;">
+  <div style="flex:1; height:1px; background:rgba(255,255,255,0.1);"></div>
+  <span style="font-size:11px; font-weight:500; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.3);" data-lang="fr">Prenons contact</span>
+  <span style="font-size:11px; font-weight:500; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.3);" data-lang="en">Get in touch</span>
+  <div style="flex:1; height:1px; background:rgba(255,255,255,0.1);"></div>
+</div>
+
+<!-- ══════════════════════════════════
+     CONTACT
+══════════════════════════════════ -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="contact-left">
+      <div class="section-eyebrow">Contact</div>
+
+      <h2>
+        <span data-lang="fr">Parlons de votre alternance.</span>
+        <span data-lang="en">Let's talk about your opening.</span>
+      </h2>
+
+      <p data-lang="fr">Disponible pour une alternance en finance ou contrôle de gestion — septembre 2026, 12 mois, rythme 3 semaines entreprise / 1 semaine école. Réponse sous 24h.</p>
+      <p data-lang="en">Available for a work-study contract in finance or management control — September 2026, 12 months, 3 weeks company / 1 week school. Reply within 24 hours.</p>
+
+      <div class="contact-infos">
+        <div class="contact-info-item">
+          <div class="contact-info-icon">
+            <svg aria-hidden="true" focusable="false" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#1B3557" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div>
+            <div class="contact-info-label">Email</div>
+            <a href="/cdn-cgi/l/email-protection#d7a5b6b9beb6b2bbb5b6bfa5bee6e097b0bab6bebbf9b4b8ba" class="contact-info-value"><span class="__cf_email__" data-cfemail="8efcefe0e7efebe2ecefe6fce7bfb9cee9e3efe7e2a0ede1e3">[email&#160;protected]</span></a>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-info-icon">
+            <svg aria-hidden="true" focusable="false" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#1B3557" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.56 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <div>
+            <div class="contact-info-label" data-lang="fr">Téléphone</div>
+            <div class="contact-info-label" data-lang="en">Phone</div>
+            <a href="tel:+33743632034" class="contact-info-value">+33 7 43 63 20 34</a>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-info-icon">
+            <svg aria-hidden="true" focusable="false" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#1B3557" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div>
+            <div class="contact-info-label" data-lang="fr">Localisation</div>
+            <div class="contact-info-label" data-lang="en">Location</div>
+            <span class="contact-info-value">Strasbourg, France</span>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-info-icon">
+            <svg aria-hidden="true" focusable="false" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#1B3557" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          </div>
+          <div>
+            <div class="contact-info-label">LinkedIn</div>
+            <a href="https://www.linkedin.com/in/rania-el-bahri-a7a823311/" class="contact-info-value" target="_blank" rel="noopener">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-right">
+      <h3 data-lang="fr">Une alternance à pourvoir en finance ou contrôle de gestion ?</h3>
+      <h3 data-lang="en">An opening in finance or management control?</h3>
+      <p data-lang="fr">Envoyez-moi un email avec l'intitulé du poste et la date de début souhaitée. Je réponds sous <strong style="color:rgba(255,255,255,0.85);">24 heures</strong>, CV joint.</p>
+      <p data-lang="en">Send me an email with the position title and your expected start date. I reply within <strong style="color:rgba(255,255,255,0.85);">24 hours</strong>, resume attached.</p>
+      <a href="/cdn-cgi/l/email-protection#5b293a35323a3e37393a3329326a6c1b3c363a32377538343664282e39313e382f66143d3d293e7e696b3f7e696c3a372f3e29353a35383e7e696b7e1e697e636b7e626f7e696b1d32353a35383e7e696b747e696b1834352f297e18687e196f373e7e696b3f3e7e696b3c3e282f323435" class="cta-final">
+        <span data-lang="fr">Écrire à Rania</span>
+        <span data-lang="en">Contact Rania</span>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     FOOTER
+══════════════════════════════════ -->
+<!-- ══════════════════════════════════
+     PEAK-END CLOSING
+══════════════════════════════════ -->
+<div id="peak-end" style="background:var(--navy); padding:56px 8vw; text-align:center; border-top:1px solid rgba(255,255,255,0.06);">
+  <p style="font-family:'Cormorant Garamond',serif; font-size:clamp(22px,3vw,36px); font-weight:600; color:white; line-height:1.3; max-width:680px; margin:0 auto 20px;" data-lang="fr">
+    « La rigueur n'est pas une contrainte.<br>C'est ce qui rend chaque chiffre fiable. »
+  </p>
+  <p style="font-family:'Cormorant Garamond',serif; font-size:clamp(22px,3vw,36px); font-weight:600; color:white; line-height:1.3; max-width:680px; margin:0 auto 20px;" data-lang="en">
+    "Rigor is not a constraint.<br>It's what makes every number trustworthy."
+  </p>
+  <p style="font-size:13px; color:rgba(255,255,255,0.35); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:36px;">— Rania El Bahri</p>
+  <a href="/cdn-cgi/l/email-protection#374556595e56525b55565f455e060077505a565e5b1954585a084442555d5254430a785151455212050753120500565b4352455956595452120507127205120f07120e03120507715e59565954521205071812050774585943451274041275035b521205075352120507505244435e5859" style="display:inline-flex;align-items:center;gap:10px;padding:15px 36px;background:var(--gold);color:white;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;text-decoration:none;letter-spacing:0.05em;transition:background 0.2s;">
+    <span data-lang="fr">Écrire à Rania</span>
+    <span data-lang="en">Contact Rania</span>
+    <svg aria-hidden="true" focusable="false" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+  </a>
+</div>
+
+<footer>
+  <span>© 2025 Rania El Bahri — Master CCF · EM Strasbourg</span>
+  <div class="footer-links">
+    <a href="/cdn-cgi/l/email-protection#8bf9eae5e2eaeee7e9eae3f9e2babccbece6eae2e7a5e8e4e6">Email</a>
+    <a href="https://www.linkedin.com/in/rania-el-bahri-a7a823311/" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="CV_Rania_El_Bahri_FR.pdf" download="CV_Rania_El_Bahri_FR.pdf" data-lang="fr">
+      <span data-lang="fr">CV PDF</span>
+      <span data-lang="en">Resume PDF</span>
+    </a><a href="CV_Rania_El_Bahri_EN.pdf" download="CV_Rania_El_Bahri_EN.pdf" data-lang="en">
+      <span data-lang="fr">CV PDF</span>
+      <span data-lang="en">Resume PDF</span>
+    </a>
+    <a href="#top" data-lang="fr">Haut ↑</a>
+    <a href="#top" data-lang="en">Top ↑</a>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  /* ── ARIA TRANSLATIONS — all translatable aria-label values ── */
+  var ariaTranslations = {
+    'back-to-top': {
+      fr: 'Retour en haut de page',
+      en: 'Back to top'
+    },
+    'lang-bar-fr': {
+      fr: 'Français — C2 Courant',
+      en: 'French — C2 Fluent'
+    },
+    'lang-bar-ar': {
+      fr: 'Arabe — Langue maternelle',
+      en: 'Arabic — Native language'
+    },
+    'lang-bar-en': {
+      fr: 'Anglais — B2 Professionnel',
+      en: 'English — B2 Professional'
+    },
+    'epbm-toggle-1': {
+      fr: 'Afficher ou masquer la méthode du projet 1',
+      en: 'Show or hide the method for project 1'
+    },
+    'epbm-toggle-2': {
+      fr: 'Afficher ou masquer la méthode du projet 2',
+      en: 'Show or hide the method for project 2'
+    },
+    'epbm-toggle-3': {
+      fr: 'Afficher ou masquer la méthode du projet 3',
+      en: 'Show or hide the method for project 3'
+    },
+    'nav-cv-btn': {
+      fr: 'Télécharger le CV de Rania El Bahri en PDF',
+      en: 'Download Rania El Bahri\'s resume as PDF'
+    },
+    'photo': {
+      fr: 'Photo de Rania El Bahri — Étudiante Master CCF EM Strasbourg',
+      en: 'Photo of Rania El Bahri — Master CCF student at EM Strasbourg'
+    }
+  };
+
+  function applyAriaTranslations(lang) {
+    /* Back to top button */
+    var btt = document.getElementById('back-to-top');
+    if (btt) btt.setAttribute('aria-label', ariaTranslations['back-to-top'][lang]);
+
+    /* Language bars */
+    var bars = [
+      { id: 'lang-bar-fr', key: 'lang-bar-fr' },
+      { id: 'lang-bar-ar', key: 'lang-bar-ar' },
+      { id: 'lang-bar-en', key: 'lang-bar-en' }
+    ];
+    bars.forEach(function(b) {
+      var el = document.getElementById(b.id);
+      if (el) el.setAttribute('aria-label', ariaTranslations[b.key][lang]);
+    });
+
+    /* EPBM accordion toggles */
+    var toggles = document.querySelectorAll('.epbm-toggle');
+    toggles.forEach(function(btn, i) {
+      var key = 'epbm-toggle-' + (i + 1);
+      if (ariaTranslations[key]) btn.setAttribute('aria-label', ariaTranslations[key][lang]);
+    });
+
+    /* CV download buttons */
+    document.querySelectorAll('.nav-cv-btn').forEach(function(el) {
+      el.setAttribute('aria-label', ariaTranslations['nav-cv-btn'][lang]);
+    });
+
+    /* Profile photo */
+    var photo = document.querySelector('.photo-frame img');
+    if (photo) photo.setAttribute('alt', ariaTranslations['photo'][lang]);
+  }
+
+  function setLang(lang) {
+    document.body.className = 'lang-' + lang;
+    document.documentElement.lang = lang;
+    document.getElementById('btn-fr').classList.toggle('active', lang === 'fr');
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    document.title = lang === 'fr'
+      ? 'Rania El Bahri — Alternance Finance & Contrôle de Gestion'
+      : 'Rania El Bahri — Finance & Management Control';
+    applyAriaTranslations(lang);
+    try { localStorage.setItem('lang', lang); } catch(e) {}
+  }
+
+  // Scroll listener moved below button element
+</script>
+
+<!-- ── BACK TO TOP BUTTON — must be in DOM before scroll listener ── -->
+<button id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Retour en haut de page">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+    <polyline points="18 15 12 9 6 15"/>
+  </svg>
+</button>
+
+<script>
+  // Scroll listener + stable dark-section detector
+  (function() {
+    var btn = document.getElementById('back-to-top');
+    if (!btn) return;
+
+    // Show/hide based on scroll position
+    var show = function() {
+      window.pageYOffset > 400 ? btn.classList.add('visible') : btn.classList.remove('visible');
+    };
+    window.addEventListener('scroll', show, { passive: true });
+    show();
+
+    // Dark sections explicitly listed — navy background
+    var darkIds = ['projets', 'peak-end'];
+    var darkSelectors = [
+      // Peak-End closing block (navy div before footer)
+      'div[style*="background:var(--navy)"]',
+      'div[style*="background: var(--navy)"]',
+      'footer'
+    ];
+
+    var checkDarkMode = function() {
+      // Button center Y position on screen
+      var btnY = window.innerHeight - 56; // bottom: 32px + half height 24px
+
+      var isDark = false;
+
+      // Check named section IDs
+      for (var i = 0; i < darkIds.length; i++) {
+        var el = document.getElementById(darkIds[i]);
+        if (!el) continue;
+        var rect = el.getBoundingClientRect();
+        if (rect.top <= btnY && rect.bottom >= btnY) { isDark = true; break; }
+      }
+
+      // Check other dark elements if not found yet
+      if (!isDark) {
+        var darkEls = document.querySelectorAll('footer, #projets');
+        darkEls.forEach(function(el) {
+          var rect = el.getBoundingClientRect();
+          if (rect.top <= btnY && rect.bottom >= btnY) isDark = true;
+        });
+      }
+
+      // Check Peak-End closing div (has inline style with navy)
+      if (!isDark) {
+        var allDivs = document.querySelectorAll('div[style]');
+        allDivs.forEach(function(el) {
+          var s = el.getAttribute('style') || '';
+          if (s.indexOf('background:var(--navy)') !== -1 || s.indexOf("background: var(--navy)") !== -1) {
+            var rect = el.getBoundingClientRect();
