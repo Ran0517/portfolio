@@ -1959,3 +1959,57 @@
           var s = el.getAttribute('style') || '';
           if (s.indexOf('background:var(--navy)') !== -1 || s.indexOf("background: var(--navy)") !== -1) {
             var rect = el.getBoundingClientRect();
+          if (rect.top <= btnY && rect.bottom >= btnY) isDark = true;
+          }
+        });
+      }
+
+      btn.classList.toggle('on-dark', isDark);
+    };
+
+    window.addEventListener('scroll', checkDarkMode, { passive: true });
+    window.addEventListener('resize', checkDarkMode, { passive: true });
+    requestAnimationFrame(checkDarkMode);
+
+    var initLang = window.__initLang || document.documentElement.lang || 'fr';
+    applyAriaTranslations(initLang);
+  })();
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var u = 'raniaelbahri17';
+  var d = 'gmail.com';
+  var e = u + '@' + d;
+  var plain  = 'mailto:' + e;
+  var withFr = 'mailto:' + e + '?subject=Offre%20d%27alternance%20%E2%80%94%20Finance%20/%20Contr%C3%B4le%20de%20gestion';
+  var withEn = 'mailto:' + e + '?subject=Work-study%20offer%20%E2%80%94%20Finance%20/%20Management%20Control';
+
+  var ec = document.getElementById('email-contact');
+  if (ec) { ec.href = plain; ec.textContent = e; }
+
+  var ef = document.getElementById('email-cta-fr');
+  if (ef) ef.href = withFr;
+
+  var ep = document.getElementById('email-cta-peak');
+  if (ep) ep.href = withFr;
+
+  var efoot = document.getElementById('email-footer');
+  if (efoot) efoot.href = plain;
+
+  var orig = window.setLang;
+  if (orig) {
+    window.setLang = function(lang) {
+      orig(lang);
+      var href = (lang === 'en') ? withEn : withFr;
+      var ef2 = document.getElementById('email-cta-fr');
+      var ep2 = document.getElementById('email-cta-peak');
+      if (ef2) ef2.href = href;
+      if (ep2) ep2.href = href;
+    };
+  }
+});
+</script>
+
+</body>
+</html>
