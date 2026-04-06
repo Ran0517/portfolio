@@ -351,4 +351,714 @@
   #back-to-top.visible { opacity: 1; visibility: visible; }
   #back-to-top.on-dark { background: #F8F7F4; border-color: rgba(27,53,87,0.2); box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
   #back-to-top.on-dark svg { stroke: #1B3557; }
-  #back-to-top:hover { background: var(-
+  #back-to-top:hover { background: var(--gold); border-color: rgba(255,255,255,0.25); }
+  #back-to-top:hover svg { stroke: white; }
+  #back-to-top.on-dark:hover { background: var(--gold); border-color: rgba(255,255,255,0.25); }
+  #back-to-top.on-dark:hover svg { stroke: white; }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+  .fade-up   { animation: fadeUp 0.7s ease both; }
+  .fade-up-2 { animation: fadeUp 0.7s 0.15s ease both; }
+  .fade-up-3 { animation: fadeUp 0.7s 0.30s ease both; }
+  .fade-up-4 { animation: fadeUp 0.7s 0.45s ease both; }
+
+  @media (max-width: 960px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-visual { min-height: 340px; padding: 60px 8vw; }
+    .about-grid { grid-template-columns: 1fr; gap: 48px; }
+    .skills-sidebar { position: static; }
+    .project-cards { grid-template-columns: 1fr; }
+    .contact-inner { grid-template-columns: 1fr; gap: 56px; }
+  }
+  @media (max-width: 640px) {
+    .nav-right li:not(:last-child):not(:nth-last-child(2)) { display: none; }
+    section { padding: 72px 5vw; }
+    .hero-content { padding: 56px 5vw; }
+    .contact-right { padding: 36px 24px; }
+  }
+</style>
+</head>
+<body class="lang-fr" onload="document.body.className='lang-'+(window.__initLang||'fr')">
+
+<nav>
+  <a href="#top" class="nav-logo">Rania El Bahri</a>
+  <ul class="nav-right">
+    <li><a href="#profil" data-lang="fr">Profil</a><a href="#profil" data-lang="en">Profile</a></li>
+    <li><a href="#projets" data-lang="fr">Projets</a><a href="#projets" data-lang="en">Projects</a></li>
+    <li><a href="#contact" data-lang="fr">Contact</a><a href="#contact" data-lang="en">Contact</a></li>
+    <li>
+      <a href="CV_Rania_El_Bahri_FR.pdf" download="CV_Rania_El_Bahri_FR.pdf" class="nav-cv-btn" data-lang="fr">
+        <svg aria-hidden="true" focusable="false" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Télécharger mon CV
+      </a>
+      <a href="CV_Rania_El_Bahri_EN.pdf" download="CV_Rania_El_Bahri_EN.pdf" class="nav-cv-btn" data-lang="en">
+        <svg aria-hidden="true" focusable="false" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download my Resume
+      </a>
+    </li>
+    <li>
+      <div class="lang-switch">
+        <button class="lang-btn active" id="btn-fr" onclick="setLang('fr')">FR</button>
+        <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+      </div>
+    </li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-content">
+    <span class="hero-tag fade-up" data-lang="fr">Alternance Finance / Conformité · Septembre 2026 · 3 semaines entreprise / 1 semaine école</span>
+    <span class="hero-tag fade-up" data-lang="en">Work-study · Finance / Compliance · September 2026 · 3 weeks company / 1 week school</span>
+
+    <h1 class="fade-up-2">
+      <span data-lang="fr">De la donnée brute<br>à la décision financière.</span>
+      <span data-lang="en">From raw data<br>to financial decision.</span>
+    </h1>
+
+    <p class="hero-golden fade-up-3" data-lang="fr">Je transforme des données financières en recommandations actionnables.</p>
+    <p class="hero-sub fade-up-3" data-lang="fr">
+      Master CCF · EM Strasbourg · Exposée aux environnements bancaire (Wafasalaf) et fiscal (ACF Conseil) dès ma Licence — disponible dès septembre 2026 · Rythme : 3 sem. entreprise / 1 sem. école · Durée : 12 mois · Mobilité : Île-de-France &amp; Strasbourg.
+    </p>
+    <p class="hero-golden fade-up-3" data-lang="en">I turn financial data into actionable recommendations.</p>
+    <p class="hero-sub fade-up-3" data-lang="en">
+      Master CCF · EM Strasbourg · Proven exposure to banking (Wafasalaf) and tax/audit (ACF Conseil) environments since my Bachelor's — available from September 2026 · Rhythm: 3 weeks company / 1 week school · Duration: 12 months · Mobility: Île-de-France &amp; Strasbourg.
+    </p>
+
+    <div class="cta-group fade-up-4">
+      <a href="#contact" class="btn-primary">
+        <span data-lang="fr">Discutons alternance</span>
+        <span data-lang="en">Let's discuss your opening</span>
+        <svg aria-hidden="true" focusable="false" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a href="CV_Rania_El_Bahri_FR.pdf" download="CV_Rania_El_Bahri_FR.pdf" class="btn-secondary" data-lang="fr">
+        <svg aria-hidden="true" focusable="false" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Télécharger mon CV
+      </a>
+      <a href="CV_Rania_El_Bahri_EN.pdf" download="CV_Rania_El_Bahri_EN.pdf" class="btn-secondary" data-lang="en">
+        <svg aria-hidden="true" focusable="false" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download Resume
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <svg class="diamond-pattern" width="56" height="56" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+      <polygon points="60,8 112,60 60,112 8,60" stroke="#C9923B" stroke-width="1.2" fill="none"/>
+      <polygon points="60,24 96,60 60,96 24,60" stroke="#C9923B" stroke-width="0.8" fill="none"/>
+      <polygon points="60,40 80,60 60,80 40,60" stroke="#C9923B" stroke-width="0.6" fill="none"/>
+      <circle cx="60" cy="8" r="2" fill="#C9923B"/>
+      <circle cx="112" cy="60" r="2" fill="#C9923B"/>
+      <circle cx="60" cy="112" r="2" fill="#C9923B"/>
+      <circle cx="8" cy="60" r="2" fill="#C9923B"/>
+      <line x1="60" y1="8" x2="60" y2="24" stroke="#C9923B" stroke-width="0.6"/>
+      <line x1="112" y1="60" x2="96" y2="60" stroke="#C9923B" stroke-width="0.6"/>
+      <line x1="60" y1="112" x2="60" y2="96" stroke="#C9923B" stroke-width="0.6"/>
+      <line x1="8" y1="60" x2="24" y2="60" stroke="#C9923B" stroke-width="0.6"/>
+    </svg>
+
+    <div class="photo-wrap">
+      <div class="photo-frame">
+        <img src="photo.jpg" alt="Rania El Bahri — Étudiante Master CCF EM Strasbourg" style="width:100%;height:100%;object-fit:cover;object-position:center top;" loading="eager"/>
+      </div>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-num">3</div>
+        <div class="stat-label" data-lang="fr">Expériences professionnelles</div>
+        <div class="stat-label" data-lang="en">Professional experiences</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" style="font-size:28px; line-height:1.1;">Sept.<br>2026</div>
+        <div class="stat-label" data-lang="fr">Disponible en alternance</div>
+        <div class="stat-label" data-lang="en">Available for work-study</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" id="lang-count">3</div>
+        <div class="stat-label" data-lang="fr">Langues maîtrisées</div>
+        <div class="stat-label" data-lang="en">Languages spoken</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" style="font-size:30px;">AMF</div>
+        <div class="stat-label" data-lang="fr">Certification en cours</div>
+        <div class="stat-label" data-lang="en">Certification in progress</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROFIL -->
+<section id="profil">
+  <div class="section-eyebrow">
+    <span data-lang="fr">Profil</span>
+    <span data-lang="en">Profile</span>
+  </div>
+  <h2>
+    <span data-lang="fr">Une méthode avant le diplôme</span>
+    <span data-lang="en">Method before the degree</span>
+  </h2>
+
+  <div class="about-grid">
+    <div class="about-narrative">
+      <!-- FR -->
+      <p data-lang="fr">
+        Avant l'EM Strasbourg, il y avait déjà <strong>Wafasalaf</strong> — un back-office bancaire réel, des dossiers de financement à fiabiliser, une conformité réglementaire à respecter. J'ai appris là-bas ce qu'aucun cours ne peut enseigner : le coût d'une erreur dans un système réglementé.
+      </p>
+      <p data-lang="fr">
+        Chez <strong>ACF Conseil</strong>, c'est la rigueur fiscale. Déclarations fiscales, révision des comptes, vérification de la conformité documentaire — trois mois à opérer dans un environnement où chaque pièce justificative compte.
+      </p>
+      <p data-lang="fr">
+        Aujourd'hui en <strong>Master CCF à l'EM Strasbourg</strong>, je prépare la certification AMF (mars 2026). Parce qu'analyser sans comprendre le cadre réglementaire, ça ne suffit pas.
+      </p>
+      <!-- EN -->
+      <p data-lang="en">
+        Before EM Strasbourg, there was already <strong>Wafasalaf</strong> — a real banking back-office, client financing files to validate, regulatory compliance to uphold. That's where I learned what no course can teach: the cost of an error in a regulated system.
+      </p>
+      <p data-lang="en">
+        At <strong>ACF Conseil</strong>, it was tax rigor. Tax filings, account reviews, document compliance checks — three months operating in an environment where every supporting document matters.
+      </p>
+      <p data-lang="en">
+        Now in my <strong>Master's CCF at EM Strasbourg</strong>, I am preparing the AMF certification (March 2026). Because analyzing without understanding the regulatory framework is not enough.
+      </p>
+
+      <div class="divider">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true" focusable="false">
+          <polygon points="6,1 11,6 6,11 1,6" stroke="#96611A" stroke-width="1.2" fill="rgba(150,97,26,0.15)"/>
+          <polygon points="6,3.5 8.5,6 6,8.5 3.5,6" stroke="#96611A" stroke-width="0.7" fill="none"/>
+        </svg>
+      </div>
+
+      <div class="dual-timeline">
+        <!-- LEFT: Expériences -->
+        <div>
+          <div class="tl-col-label exp" data-lang="fr">Expériences</div>
+          <div class="tl-col-label exp" data-lang="en">Experience</div>
+          <div class="timeline tl-exp">
+
+            <!-- Wafasalaf — featured -->
+            <div class="timeline-item featured">
+              <span class="featured-badge" data-lang="fr">Expérience bancaire clé</span>
+              <span class="featured-badge" data-lang="en">Key banking experience</span>
+              <div class="timeline-date" data-lang="fr">Juin – Août 2025</div>
+              <div class="timeline-date" data-lang="en">June – August 2025</div>
+              <div class="timeline-title" data-lang="fr">Stage PFE — Conformité & contrôle des dossiers de financement</div>
+              <div class="timeline-title" data-lang="en">Final-year Internship — Compliance & financing file control</div>
+              <div class="timeline-org" data-lang="fr">Wafasalaf · Institut financier · Casablanca, Maroc</div>
+              <div class="timeline-org" data-lang="en">Wafasalaf · Financial institute · Casablanca, Morocco</div>
+              <div class="timeline-desc" data-lang="fr">Vérification de la conformité des dossiers clients, contrôle interne des données, application des procédures dans un environnement bancaire réglementé.</div>
+              <div class="timeline-desc" data-lang="en">Client file compliance checks, internal data control, procedures application in a regulated banking environment.</div>
+            </div>
+
+            <!-- ACF Conseil -->
+            <div class="timeline-item">
+              <div class="timeline-date" data-lang="fr">Juil. – Sept. 2024</div>
+              <div class="timeline-date" data-lang="en">Jul. – Sep. 2024</div>
+              <div class="timeline-title" data-lang="fr">Stage — Fiscalité & révision comptable</div>
+              <div class="timeline-title" data-lang="en">Internship — Tax & accounting review</div>
+              <div class="timeline-org" data-lang="fr">ACF Conseil · Casablanca, Maroc</div>
+              <div class="timeline-org" data-lang="en">ACF Conseil · Casablanca, Morocco</div>
+              <div class="timeline-desc" data-lang="fr">Préparation de déclarations fiscales, vérification de la conformité documentaire, révision des comptes et contrôle des pièces justificatives.</div>
+              <div class="timeline-desc" data-lang="en">Tax return preparation, document compliance checks, account review and supporting document control.</div>
+            </div>
+
+            <!-- Xcopy -->
+            <div class="timeline-item" style="padding-bottom:0">
+              <div class="timeline-date" data-lang="fr">Juin – Juil. 2024</div>
+              <div class="timeline-date" data-lang="en">June – July 2024</div>
+              <div class="timeline-title" data-lang="fr">Stage — Optimisation des processus documentaires</div>
+              <div class="timeline-title" data-lang="en">Internship — Document process optimization</div>
+              <div class="timeline-org" data-lang="fr">Xcopy · Solutions bureautiques · Casablanca, Maroc</div>
+              <div class="timeline-org" data-lang="en">Xcopy · Office Solutions · Casablanca, Morocco</div>
+              <div class="timeline-desc" data-lang="fr">Refonte du système d'archivage documentaire — délai de recherche réduit de 8 à 2 minutes.</div>
+              <div class="timeline-desc" data-lang="en">Document archiving system overhaul — retrieval time reduced from 8 to 2 minutes.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: Formation -->
+        <div>
+          <div class="tl-col-label edu" data-lang="fr">Formation</div>
+          <div class="tl-col-label edu" data-lang="en">Education</div>
+          <div class="timeline tl-edu">
+            <div class="timeline-item">
+              <div class="timeline-date" data-lang="fr">Sept. 2025 → Sept. 2027 (en cours)</div>
+              <div class="timeline-date" data-lang="en">Sept. 2025 → Sept. 2027 (ongoing)</div>
+              <div class="timeline-title" data-lang="fr">Master Comptabilité – Contrôle – Finance</div>
+              <div class="timeline-title" data-lang="en">Master's — Accounting, Control & Finance</div>
+              <div class="timeline-org" data-lang="fr">EM Strasbourg Business School</div>
+              <div class="timeline-org" data-lang="en">EM Strasbourg Business School</div>
+              <div class="timeline-desc" data-lang="fr">Programme Grande École · Certification AMF en cours (mars 2026)</div>
+              <div class="timeline-desc" data-lang="en">Grande École programme · AMF certification in progress (March 2026)</div>
+            </div>
+            <div class="timeline-item" style="padding-bottom:0">
+              <div class="timeline-date" data-lang="fr">Sept. 2022 → Juil. 2025</div>
+              <div class="timeline-date" data-lang="en">Sept. 2022 → Jul. 2025</div>
+              <div class="timeline-title" data-lang="fr">Licence Management — Finance & Comptabilité</div>
+              <div class="timeline-title" data-lang="en">Bachelor's — Finance & Accounting</div>
+              <div class="timeline-org" data-lang="fr">Université internationale de Casablanca</div>
+              <div class="timeline-org" data-lang="en">International University of Casablanca</div>
+              <div class="timeline-desc" data-lang="fr">Mention Très Bien</div>
+              <div class="timeline-desc" data-lang="en">Distinction — With Honours</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="skills-sidebar">
+      <div class="skills-group">
+        <div class="skills-group-label" data-lang="fr">Langues</div>
+        <div class="skills-group-label" data-lang="en">Languages</div>
+        <div class="lang-item">
+          <span class="lang-name" lang="fr" data-lang="fr">Français</span>
+          <span class="lang-name" lang="en" data-lang="en">French</span>
+        </div>
+        <div class="lang-item">
+          <span class="lang-name" lang="fr" data-lang="fr">Arabe</span>
+          <span class="lang-name" lang="en" data-lang="en">Arabic</span>
+        </div>
+        <div class="lang-item">
+          <span class="lang-name" lang="fr" data-lang="fr">Anglais</span>
+          <span class="lang-name" lang="en" data-lang="en">English</span>
+        </div>
+
+      </div>
+
+      <div class="skills-group">
+        <div class="skills-group-label" data-lang="fr">Finance, Conformité & Comptabilité</div>
+        <div class="skills-group-label" data-lang="en">Finance, Compliance & Accounting</div>
+        <div class="skill-tags">
+          <span class="skill-tag" data-lang="fr">Contrôle de conformité</span>
+          <span class="skill-tag" data-lang="en">Compliance control</span>
+          <span class="skill-tag" data-lang="fr">Analyse financière</span>
+          <span class="skill-tag" data-lang="en">Financial analysis</span>
+          <span class="skill-tag" data-lang="fr">Comptabilité générale (Sage 100)</span>
+          <span class="skill-tag" data-lang="en">General accounting (Sage 100)</span>
+          <span class="skill-tag" data-lang="fr">Fiscalité des entreprises</span>
+          <span class="skill-tag" data-lang="en">Corporate taxation</span>
+          <span class="skill-tag" data-lang="fr">Contrôle de gestion</span>
+          <span class="skill-tag" data-lang="en">Management control</span>
+          <span class="skill-tag" data-lang="fr">Marchés financiers</span>
+          <span class="skill-tag" data-lang="en">Financial markets</span>
+        </div>
+      </div>
+
+      <div class="skills-group">
+        <div class="skills-group-label" data-lang="fr">Outils</div>
+        <div class="skills-group-label" data-lang="en">Tools</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Excel — <span data-lang="fr">Recherche V, TCD</span><span data-lang="en">VLOOKUP, Pivot tables</span></span>
+          <span class="skill-tag">Sage 100 Comptabilité</span>
+          <span class="skill-tag" data-lang="fr">Pack Office</span>
+          <span class="skill-tag" data-lang="en">Microsoft Office</span>
+          
+          <span class="skill-tag">Vensim <span data-lang="fr">(modélisation)</span><span data-lang="en">(simulation modelling)</span></span>
+        </div>
+      </div>
+
+      <div class="skills-group">
+        <div class="skills-group-label" data-lang="fr">Certification</div>
+        <div class="skills-group-label" data-lang="en">Certification</div>
+        <div class="skill-tags">
+          <span class="skill-tag gold">
+            <span data-lang="fr">AMF — Marchés financiers · mars 2026</span>
+            <span data-lang="en">AMF — Financial markets · March 2026</span>
+          </span>
+        </div>
+      </div>
+
+      <div class="skills-group">
+        <div class="skills-group-label" data-lang="fr">Savoir-être</div>
+        <div class="skills-group-label" data-lang="en">Soft skills</div>
+        <div class="skill-tags">
+          <span class="skill-tag" data-lang="fr">Rigueur procédurale</span>
+          <span class="skill-tag" data-lang="en">Procedural rigor</span>
+          <span class="skill-tag" data-lang="fr">Esprit d'analyse</span>
+          <span class="skill-tag" data-lang="en">Analytical mindset</span>
+          <span class="skill-tag" data-lang="fr">Autonomie</span>
+          <span class="skill-tag" data-lang="en">Autonomy</span>
+          <span class="skill-tag" data-lang="fr">Travail en équipe</span>
+          <span class="skill-tag" data-lang="en">Teamwork</span>
+          <span class="skill-tag" data-lang="fr">Sens du détail</span>
+          <span class="skill-tag" data-lang="en">Attention to detail</span>
+        </div>
+      </div>
+
+      <div class="skills-group">
+        <div class="skills-group-label" data-lang="fr">Formation</div>
+        <div class="skills-group-label" data-lang="en">Education</div>
+        <div class="skill-tags">
+          <span class="skill-tag highlight">Master CCF — EM Strasbourg</span>
+          <span class="skill-tag" data-lang="fr">Licence Finance — UIC Casablanca</span>
+          <span class="skill-tag" data-lang="en">Bachelor Finance — UIC Casablanca</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJETS -->
+<section id="projets">
+  <div class="section-eyebrow" style="color:rgba(232,176,106,0.85)">
+    <span data-lang="fr">Projets business</span>
+    <span data-lang="en">Business cases</span>
+  </div>
+  <h2>
+    <span data-lang="fr">Expériences analysées</span>
+    <span data-lang="en">Analyzed experiences</span>
+  </h2>
+  <p class="section-intro" data-lang="fr">
+    Chaque expérience documentée selon le format EPBM : Problème · Méthodologie · Insights · Recommandation stratégique. 60 % insight business, 40 % explication des méthodes.
+  </p>
+  <p class="section-intro" data-lang="en">
+    Each experience documented using the EPBM framework: Problem · Methodology · Insights · Strategic recommendation. 60% business insight, 40% methodology breakdown.
+  </p>
+
+  <div class="project-cards">
+
+    <!-- PROJECT 01 — Wafasalaf -->
+    <div class="project-card">
+      <div class="project-num">01</div>
+      <div class="project-title" data-lang="fr">Conformité & fiabilisation des dossiers de financement</div>
+      <div class="project-title" data-lang="en">Compliance & financing file reliability</div>
+      <div class="project-org" data-lang="fr">Wafasalaf · Institut financier · 2025</div>
+      <div class="project-org" data-lang="en">Wafasalaf · Financial institute · 2025</div>
+
+      <div class="epbm-summary">
+        <div class="epbm-item" style="border-top:1px solid rgba(255,255,255,0.07); padding-top:14px;">
+          <div class="epbm-label" data-lang="fr">Problème</div>
+          <div class="epbm-label" data-lang="en">Problem</div>
+          <div class="epbm-text" data-lang="fr">Suivi de ~40 dossiers clients/semaine en back-office bancaire réglementé — chaque anomalie de conformité pouvait bloquer ou retarder une décision de financement.</div>
+          <div class="epbm-text" data-lang="en">~40 client files/week in a regulated banking back-office — each compliance anomaly could block or delay a financing decision.</div>
+        </div>
+        <div class="epbm-item">
+          <div class="epbm-label" data-lang="fr">Résultat</div>
+          <div class="epbm-label" data-lang="en">Result</div>
+          <div class="kpi-badge" data-lang="fr">Taux d'anomalies : −67 % · Allers-retours ÷ 3</div>
+          <div class="kpi-badge" data-lang="en">Anomaly rate : −67% · Back-and-forth ÷ 3</div>
+        </div>
+      </div>
+
+      <button class="epbm-toggle" onclick="toggleEpbm(this)" aria-expanded="false">
+        <span class="lbl-open" data-lang="fr">Voir la méthode</span>
+        <span class="lbl-close" data-lang="fr">Masquer la méthode</span>
+        <span class="lbl-open" data-lang="en">See the method</span>
+        <span class="lbl-close" data-lang="en">Hide the method</span>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+
+      <div class="epbm-drawer">
+        <div class="epbm-item">
+          <div class="epbm-label" data-lang="fr">Méthodologie</div>
+          <div class="epbm-label" data-lang="en">Methodology</div>
+          <div class="epbm-text" data-lang="fr">Mise en place d'une grille de contrôle sur <strong>3 points</strong> : cohérence des données client, complétude des pièces justificatives, conformité réglementaire — appliquée avant toute transmission aux équipes commerciales.</div>
+          <div class="epbm-text" data-lang="en">Implemented a 3-checkpoint control grid: client data consistency, document completeness, regulatory compliance — applied before every handover to commercial teams.</div>
+        </div>
+        <div class="epbm-item">
+          <div class="epbm-label">Insight</div>
+          <div class="epbm-text" data-lang="fr">La standardisation du contrôle en amont réduit le taux d'anomalies de <strong>~15 % à ~5 %</strong> et divise par 3 les allers-retours — chaque aller-retour évité = une décision de financement accélérée.</div>
+          <div class="epbm-text" data-lang="en">Upstream standardization reduced the anomaly rate from <strong>~15% to ~5%</strong>, cutting back-and-forth by 3× — each avoided exchange means a faster financing decision.</div>
+        </div>
+        <div class="epbm-item">
+          <div class="epbm-label" data-lang="fr">Recommandation</div>
+          <div class="epbm-label" data-lang="en">Recommendation</div>
+          <div class="epbm-text" data-lang="fr">Déployer la grille sur l'ensemble du back-office et viser <strong>un taux d'anomalies &lt; 3 %</strong> — réduisant le délai moyen de traitement d'une journée et sécurisant la conformité réglementaire.</div>
+          <div class="epbm-text" data-lang="en">Deploy the grid across the full back-office, targeting <strong>an anomaly rate below 3%</strong> — cutting average processing time by one day and strengthening regulatory compliance.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECT 02 — ACF Conseil -->
+    <div class="project-card">
+      <div class="project-num">02</div>
+      <div class="project-title" data-lang="fr">Conformité fiscale & révision comptable</div>
+      <div class="project-title" data-lang="en">Tax compliance & accounting review</div>
+      <div class="project-org" data-lang="fr">ACF Conseil · Cabinet comptable · 2024</div>
+      <div class="project-org" data-lang="en">ACF Conseil · Accounting firm · 2024</div>
+
+      <div class="epbm-summary">
+        <div class="epbm-item" style="border-top:1px solid rgba(255,255,255,0.07); padding-top:14px;">
+          <div class="epbm-label" data-lang="fr">Problème</div>
+          <div class="epbm-label" data-lang="en">Problem</div>
+          <div class="epbm-text" data-lang="fr">Traitement de dossiers multi-clients soumis à des obligations déclaratives strictes — moindre erreur documentaire expose le client à un risque fiscal et réglementaire.</div>
+          <div class="epbm-text" data-lang="en">Multi-client files subject to strict filing obligations — any documentation error exposes the client to tax and regulatory risk.</div>
+        </div>
+        <div class="epbm-item">
+          <div class="epbm-label" data-lang="fr">Résultat</div>
+          <div class="epbm-label" data-lang="en">Result</div>
+          <div class="kpi-badge" data-lang="fr">0 non-conformité détectée · Dossiers livrés dans les délais</div>
+          <div class="kpi-badge" data-lang="en">0 non-compliance flagged · Files delivered on time</div>
+        </div>
+      </div>
+
+      <button class="epbm-toggle" onclick="toggleEpbm(this)" aria-expanded="false">
+        <span class="lbl-open" data-lang="fr">Voir la méthode</span>
+        <span class="lbl-close" data-lang="fr">Masquer la méthode</span>
+        <span class="lbl-open" data-lang="en">See the method</span>
+        <span class="lbl-close" data-lang="en">Hide the method</span>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+
+      <div class="epbm-drawer">
+        <div class="epbm-item">
+          <div class="epbm-label" data-lang="fr">Méthodologie</div>
+          <div class="epbm-label" data-lang="en">Methodology</div>
+          <div class="epbm-text" data-lang="fr">Vérification systématique de la <strong>conformité documentaire</strong> avant soumission des déclarations fiscales : rapprochement pièces justificatives / écriture comptable, détection des incohérences.</div>
+          <div class="epbm-text" data-lang="en">Systematic <strong>document compliance check</strong> before tax filing: matching supporting documents to accounting entries, discrepancy detection.</div>
+        </div>
+        <div class="epbm-item">
+          <div class="epbm-label">Insight</div>
+          <div class="epbm-text" data-lang="fr">Un contrôle documentaire rigoureux en amont du dépôt réduit le risque de redressement fiscal — la rigueur procédurale est un levier de protection directe pour le client.</div>
+          <div class="epbm-text" data-lang="en">Rigorous pre-filing document control reduces tax audit risk — procedural rigor is a direct client protection lever.</div>
+        </div>
+        <div class="epbm-item">
+          <div class="epbm-label" data-lang="fr">Recommandation</div>
+          <div class="epbm-label" data-lang="en">Recommendation</div>
+          <div class="epbm-text" data-lang="fr">Formaliser une checklist de conformité documentaire par type de déclaration — réduisant le temps de révision et standardisant le niveau de contrôle entre collaborateurs.</div>
+          <div class="epbm-text" data-lang="en">Formalize a document compliance checklist per filing type — reducing review time and standardizing the control level across team members.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECT 03 — Xcopy -->
+    <div class="project-card">
+      <div class="project-num">03</div>
+      <div class="project-title" data-lang="fr">Optimisation des processus & réduction des coûts opérationnels</div>
+      <div class="project-title" data-lang="en">Process optimization & operational cost reduction</div>
+      <div class="project-org" data-lang="fr">Xcopy · Solutions bureautiques · 2024</div>
+      <div class="project-org" data-lang="en">Xcopy · Office Solutions · 2024</div>
+
+      <div class="epbm-summary">
+        <div class="epbm-item" style="border-top:1px solid rgba(255,255,255,0.07); padding-top:14px;">
+          <div class="epbm-label" data-lang="fr">Problème</div>
+          <div class="epbm-label" data-lang="en">Problem</div>
+          <div class="epbm-text" data-lang="fr">+200 documents non classés, allongeant les délais de traitement client — équivalent à <strong>~375 heures/an perdues</strong> en recherche documentaire pour une équipe de 5 personnes.</div>
+          <div class="epbm-text" data-lang="en">200+ unclassified documents extending client processing times — equivalent to <strong>~375 hours/year lost</strong> in document retrieval for a 5-person team.</div>
+        </div>
+        <div class="epbm-item">
+          <div class="epbm-label" data-lang="fr">Résultat</div>
+          <div class="epbm-label" data-lang="en">Result</div>
+          <div class="kpi-badge" data-lang="fr">8 min → 2 min · ~2 250 €/an de coût évité</div>
+          <div class="kpi-badge" data-lang="en">8 min → 2 min · ~€2,250/year in avoided cost</div>
+        </div>
+      </div>
+
+      <button class="epbm-toggle" onclick="toggleEpbm(this)" aria-expanded="false">
+        <span class="lbl-open" data-lang="fr">Voir la méthode</span>
+        <span class="lbl-close" data-lang="fr">Masquer la méthode</span>
+        <span class="lbl-open" data-lang="en">See the method</span>
+        <span class="lbl-close" data-lang="en">Hide the method</span>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+
+      <div class="epbm-drawer">
+        <div class="epbm-item">
+          <div class="epbm-label" data-lang="fr">Méthodologie</div>
+          <div class="epbm-label" data-lang="en">Methodology</div>
+          <div class="epbm-text" data-lang="fr">Refonte du plan de classement sur <strong>5 catégories documentaires</strong> — backlog intégral (+200 documents) traité en 6 semaines dans le strict respect des délais.</div>
+          <div class="epbm-text" data-lang="en">Redesigned filing structure across <strong>5 document categories</strong> — full backlog (200+ documents) cleared in 6 weeks within deadlines.</div>
+        </div>
+        <div class="epbm-item">
+          <div class="epbm-label">Insight</div>
+          <div class="epbm-text" data-lang="fr">Le coût d'un processus désorganisé est invisible jusqu'à ce qu'on le calcule : <strong>5 personnes × 6 min/jour × 250 jours = 125 h/an</strong>, soit ~2 250 € de masse salariale gaspillée.</div>
+          <div class="epbm-text" data-lang="en">The cost of a disorganized process is invisible until measured: <strong>5 people × 6 min/day × 250 days = 125 h/year</strong>, ~€2,250 in wasted payroll.</div>
+        </div>
+        <div class="epbm-item">
+          <div class="epbm-label" data-lang="fr">Recommandation</div>
+          <div class="epbm-label" data-lang="en">Recommendation</div>
+          <div class="epbm-text" data-lang="fr">Maintenir la rigueur par une <strong>routine d'archivage de 30 min/semaine</strong> — ROI du processus : &gt; 4,8× par rapport au coût initial.</div>
+          <div class="epbm-text" data-lang="en">Sustain rigor through a <strong>30-min/week archiving routine</strong> — process ROI: &gt;4.8× vs. initial time investment.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Transition -->
+<div style="background:var(--navy); padding:0 8vw 60px; display:flex; align-items:center; gap:20px;">
+  <div style="flex:1; height:1px; background:rgba(255,255,255,0.1);"></div>
+  <span style="font-size:11px; font-weight:500; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.3);" data-lang="fr">Prenons contact</span>
+  <span style="font-size:11px; font-weight:500; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.3);" data-lang="en">Get in touch</span>
+  <div style="flex:1; height:1px; background:rgba(255,255,255,0.1);"></div>
+</div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="contact-left">
+      <div class="section-eyebrow">Contact</div>
+      <h2>
+        <span data-lang="fr">Parlons de votre alternance.</span>
+        <span data-lang="en">Let's talk about your opening.</span>
+      </h2>
+      <p data-lang="fr">Disponible pour une alternance en finance ou contrôle de gestion — septembre 2026, 12 mois, rythme 3 semaines entreprise / 1 semaine école. Mobilité : Île-de-France &amp; Strasbourg. Réponse sous 24h.</p>
+      <p data-lang="en">Available for a work-study contract in finance or management control — September 2026, 12 months, 3 weeks company / 1 week school. Mobility: Île-de-France &amp; Strasbourg. Reply within 24 hours.</p>
+
+      <div class="contact-infos">
+        <div class="contact-info-item">
+          <div class="contact-info-icon">
+            <svg aria-hidden="true" focusable="false" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#1B3557" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div>
+            <div class="contact-info-label">Email</div>
+            <a href="#" id="email-contact" class="contact-info-value"><span class="__cf_email__" data-cfemail="4230232c2b23272e20232a302b737502252f232b2e6c212d2f">[email&#160;protected]</span></a>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-info-icon">
+            <svg aria-hidden="true" focusable="false" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#1B3557" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.56 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <div>
+            <div class="contact-info-label" data-lang="fr">Téléphone</div>
+            <div class="contact-info-label" data-lang="en">Phone</div>
+            <a href="tel:+33743632034" class="contact-info-value">+33 7 43 63 20 34</a>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-info-icon">
+            <svg aria-hidden="true" focusable="false" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#1B3557" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div>
+            <div class="contact-info-label" data-lang="fr">Localisation</div>
+            <div class="contact-info-label" data-lang="en">Location</div>
+            <span class="contact-info-value" data-lang="fr">Strasbourg · Mobilité Île-de-France</span>
+            <span class="contact-info-value" data-lang="en">Strasbourg · Open to Île-de-France</span>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-info-icon">
+            <svg aria-hidden="true" focusable="false" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#1B3557" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          </div>
+          <div>
+            <div class="contact-info-label">LinkedIn</div>
+            <a href="https://www.linkedin.com/in/rania-el-bahri-a7a823311/" class="contact-info-value" target="_blank" rel="noopener">Rania El Bahri</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-right">
+      <h3 data-lang="fr">Une alternance à pourvoir en finance ou contrôle de gestion ?</h3>
+      <h3 data-lang="en">An opening in finance or management control?</h3>
+      <p data-lang="fr">Envoyez-moi un email avec l'intitulé du poste et la date de début souhaitée. Je réponds sous <strong style="color:rgba(255,255,255,0.85);">24 heures</strong>, CV joint.</p>
+      <p data-lang="en">Send me an email with the position title and your expected start date. I reply within <strong style="color:rgba(255,255,255,0.85);">24 hours</strong>, resume attached.</p>
+      <a href="#" id="email-cta-fr" class="cta-final">
+        <span data-lang="fr">Écrire à Rania</span>
+        <span data-lang="en">Contact Rania</span>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Peak-end -->
+<div id="peak-end" style="background:var(--navy); padding:56px 8vw; text-align:center; border-top:1px solid rgba(255,255,255,0.06);">
+  <p style="font-family:'Cormorant Garamond',serif; font-size:clamp(22px,3vw,36px); font-weight:600; color:white; line-height:1.3; max-width:680px; margin:0 auto 20px;" data-lang="fr">
+    « La rigueur n'est pas une contrainte.<br>C'est ce qui rend chaque chiffre fiable. »
+  </p>
+  <p style="font-family:'Cormorant Garamond',serif; font-size:clamp(22px,3vw,36px); font-weight:600; color:white; line-height:1.3; max-width:680px; margin:0 auto 20px;" data-lang="en">
+    "Rigor is not a constraint.<br>It's what makes every number trustworthy."
+  </p>
+  <p style="font-size:13px; color:rgba(255,255,255,0.35); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:36px;">— Rania El Bahri</p>
+  <a href="#" id="email-cta-peak" style="display:inline-flex;align-items:center;gap:10px;padding:15px 36px;background:var(--gold);color:white;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;text-decoration:none;letter-spacing:0.05em;transition:background 0.2s;">
+    <span data-lang="fr">Écrire à Rania</span>
+    <span data-lang="en">Contact Rania</span>
+    <svg aria-hidden="true" focusable="false" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+  </a>
+</div>
+
+<footer>
+  <span>© 2025 Rania El Bahri — Master CCF · EM Strasbourg</span>
+  <div class="footer-links">
+    <a href="#" id="email-footer">Email</a>
+    <a href="https://www.linkedin.com/in/rania-el-bahri-a7a823311/" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="CV_Rania_El_Bahri_FR.pdf" download="CV_Rania_El_Bahri_FR.pdf" data-lang="fr">Télécharger mon CV</a>
+    <a href="CV_Rania_El_Bahri_EN.pdf" download="CV_Rania_El_Bahri_EN.pdf" data-lang="en">Download my Resume</a>
+    <a href="#top" data-lang="fr">Haut ↑</a>
+    <a href="#top" data-lang="en">Top ↑</a>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  var ariaTranslations = {
+    'back-to-top': { fr: 'Retour en haut de page', en: 'Back to top' },
+    'lang-fr': { fr: 'Français — DALF C1 (693/699)', en: 'French — DALF C1 (693/699)' },
+    'lang-ar': { fr: 'Arabe — Langue maternelle', en: 'Arabic — Native' },
+    'lang-en': { fr: 'Anglais — B2', en: 'English — B2' },
+    'lang-es': { fr: 'Espagnol — B2', en: 'Spanish — B2' }
+  };
+
+  function applyAriaTranslations(lang) {
+    var btt = document.getElementById('back-to-top');
+    if (btt) btt.setAttribute('aria-label', ariaTranslations['back-to-top'][lang]);
+
+  }
+
+  function setLang(lang) {
+    document.body.className = 'lang-' + lang;
+    document.documentElement.lang = lang;
+    document.getElementById('btn-fr').classList.toggle('active', lang === 'fr');
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    document.title = lang === 'fr'
+      ? 'Rania El Bahri — Alternance Finance & Contrôle de Gestion'
+      : 'Rania El Bahri — Finance & Management Control';
+    applyAriaTranslations(lang);
+    try { localStorage.setItem('lang', lang); } catch(e) {}
+    var withFr = 'mailto:raniaelbahri17@gmail.com?subject=Offre%20d%27alternance%20%E2%80%94%20Finance%20/%20Contr%C3%B4le%20de%20gestion';
+    var withEn = 'mailto:raniaelbahri17@gmail.com?subject=Work-study%20offer%20%E2%80%94%20Finance%20/%20Management%20Control';
+    var href = (lang === 'en') ? withEn : withFr;
+    var ef = document.getElementById('email-cta-fr');
+    var ep = document.getElementById('email-cta-peak');
+    if (ef) ef.href = href;
+    if (ep) ep.href = href;
+  }
+</script>
+
+<button id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Retour en haut de page">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+    <polyline points="18 15 12 9 6 15"/>
+  </svg>
+</button>
+
+<script>
+  (function() {
+    var btn = document.getElementById('back-to-top');
+    if (!btn) return;
+    var show = function() { window.pageYOffset > 400 ? btn.classList.add('visible') : btn.classList.remove('visible'); };
+    window.addEventListener('scroll', show, { passive: true });
+    show();
+    var checkDarkMode = function() {
+      var btnY = window.innerHeight - 56;
+      var isDark = false;
+      document.querySelectorAll('footer, #projets, #peak-end').forEach(function(el) {
+        var rect = el.getBoundingClientRect();
+        if (rect.top <= btnY && rect.bottom >= btnY) isDark = true;
+      });
+      document.querySelectorAll('div[style]').forEach(function(el) {
+        var s = el.getAttribute('style') || '';
+        if (s.indexOf('background:var(--navy)') !== -1) {
+          var rect = el.getBoundingClientRect();
+          if (rect.top <= btnY && rect.bottom >= btnY) isDark = true;
+        }
+      });
+      btn.classList.toggle('on-dark', isDark);
+    };
+    window.addEventListener('scroll', checkDarkMode, { passive: true });
+    window.addEventListener('resize', checkDarkMode, { passive: true });
+    requestAnimationFrame(checkDarkMode);
+    applyAriaTranslations(window.__initLang || 'fr');
+  })();
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var e = 'raniaelbahri17@gmail.com';
+  var plain  = 'mailto:' + e;
+  var withFr = 'mailto:' + e + '?subject=Offre%20d%27alternance%20%E2%80%94%20Finance%20/%20Contr%C3%B4le%20de%20gestion';
+  var ec = document.getElementById('email-contact');
+  if (ec) { ec.href = plain; ec.textContent = e; }
+  var ef = document.getElementById('email-cta-fr');
+  if (ef) ef.href = wit
